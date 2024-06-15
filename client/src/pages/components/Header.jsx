@@ -1,13 +1,10 @@
-import Logo from './images/vekua_simplified.png'
-import { Fragment, useState, useEffect } from 'react'
-import { Dialog, Popover, Transition } from '@headlessui/react'
-import {
-  Bars3Icon,
-  XMarkIcon,
-} from '@heroicons/react/24/outline'
-import { ChevronDownIcon } from '@heroicons/react/20/solid'
-import { styled } from '@mui/material/styles';
-import Switch from '@mui/material/Switch';
+import Logo from "./images/vekua_simplified.png";
+import { Fragment, useState, useEffect } from "react";
+import { Dialog, Popover, Transition } from "@headlessui/react";
+import { Bars3Icon, XMarkIcon } from "@heroicons/react/24/outline";
+import { ChevronDownIcon } from "@heroicons/react/20/solid";
+import { styled } from "@mui/material/styles";
+import Switch from "@mui/material/Switch";
 
 const IOSSwitch = styled((props) => (
   <Switch focusVisibleClassName=".Mui-focusVisible" disableRipple {...props} />
@@ -15,107 +12,128 @@ const IOSSwitch = styled((props) => (
   width: 42,
   height: 26,
   padding: 0,
-  '& .MuiSwitch-switchBase': {
+  "& .MuiSwitch-switchBase": {
     padding: 0,
     margin: 2,
-    transitionDuration: '300ms',
-    '&.Mui-checked': {
-      transform: 'translateX(16px)',
-      color: '#fff',
-      '& + .MuiSwitch-track': {
-        backgroundColor: theme.palette.mode === 'dark' ? '#909590' : '#909590',
+    transitionDuration: "300ms",
+    "&.Mui-checked": {
+      transform: "translateX(16px)",
+      color: "#fff",
+      "& + .MuiSwitch-track": {
+        backgroundColor: theme.palette.mode === "dark" ? "#909590" : "#909590",
         opacity: 1,
         border: 0,
       },
-      '&.Mui-disabled + .MuiSwitch-track': {
-        backgroundColor: '#909590',
+      "&.Mui-disabled + .MuiSwitch-track": {
+        backgroundColor: "#909590",
         opacity: 0.5,
       },
     },
-    '&.Mui-focusVisible .MuiSwitch-thumb': {
-      color: '#33cf4d',
-      border: '6px solid #fff',
+    "&.Mui-focusVisible .MuiSwitch-thumb": {
+      color: "#33cf4d",
+      border: "6px solid #fff",
     },
-    '&.Mui-disabled .MuiSwitch-thumb': {
+    "&.Mui-disabled .MuiSwitch-thumb": {
       color:
-        theme.palette.mode === 'light'
+        theme.palette.mode === "light"
           ? theme.palette.grey[100]
           : theme.palette.grey[600],
     },
-    '&.Mui-disabled + .MuiSwitch-track': {
-      opacity: theme.palette.mode === 'light' ? 0.7 : 0.3,
+    "&.Mui-disabled + .MuiSwitch-track": {
+      opacity: theme.palette.mode === "light" ? 0.7 : 0.3,
     },
   },
-  '& .MuiSwitch-thumb': {
-    boxSizing: 'border-box',
+  "& .MuiSwitch-thumb": {
+    boxSizing: "border-box",
     width: 22,
     height: 22,
   },
-  '& .MuiSwitch-track': {
+  "& .MuiSwitch-track": {
     borderRadius: 26 / 2,
-    backgroundColor: theme.palette.mode === 'light' ? '#b0b1b0' : '#b0b1b0',
+    backgroundColor: theme.palette.mode === "light" ? "#b0b1b0" : "#b0b1b0",
     opacity: 1,
-    transition: theme.transitions.create(['background-color'], {
+    transition: theme.transitions.create(["background-color"], {
       duration: 500,
     }),
   },
 }));
 
 const products = [
-  { name: 'ისტორია და მისია', href: '/history' },
-  { name: 'შინაგანწესი', href: '/laws' },
-  { name: 'სასწავლო გეგმა', href: '/plan' },
+  { name: "ისტორია და მისია", href: "/history" },
+  { name: "შინაგანწესი", href: "/laws" },
+  { name: "სასწავლო გეგმა", href: "/plan" },
   // { name: 'დირექცია და მასწავლებლები', href: '/teachers' },
-]
+];
+
+const teachers = [
+  { name: "ნინო მთიულიშვილის ბლოგი", href: "https://geocodna.wordpress.com/" },
+  { name: "ნინო ნასყიდაშვილის ბლოგი", href: "http://nino42.blogspot.com/" },
+  {
+    name: "ნინო ნასყიდაშვილის ბლოგი მოსწავლეებისთვის",
+    href: "http://moscavleebs.blogspot.com/",
+  },
+  {
+    name: "ანა სალაყაიას ბლოგი",
+    href: "https://mtatsminda42.blogspot.com/p/blog-page.html",
+  },
+];
 
 export default function Example() {
-  const [mobileMenuOpen, setMobileMenuOpen] = useState(false)
+  const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const [checked, setChecked] = useState(false);
-  const [theme, setTheme] = useState('light');
+  const [theme, setTheme] = useState("light");
   const [fixed, setFixed] = useState(false);
 
   useEffect(() => {
     setTheme(localStorage.theme);
-    if (theme === 'light') {
-      document.documentElement.classList.remove('dark');
+    if (theme === "light") {
+      document.documentElement.classList.remove("dark");
       setChecked(false);
-    }
-    else {
-      document.documentElement.classList.add('dark');
+    } else {
+      document.documentElement.classList.add("dark");
       setChecked(true);
     }
   }, [theme]);
 
-
   function changeTheme() {
-    if (theme === 'light') {
-      setTheme('dark');
-      localStorage.setItem('theme', 'dark');
+    if (theme === "light") {
+      setTheme("dark");
+      localStorage.setItem("theme", "dark");
+    } else {
+      setTheme("light");
+      localStorage.setItem("theme", "light");
     }
-    else {
-      setTheme('light');
-      localStorage.setItem('theme', 'light');
-    }
-
   }
 
   useEffect(() => {
-    window.addEventListener('scroll', () => {
+    window.addEventListener("scroll", () => {
       if (window.scrollY > 60) {
         setFixed(true);
-      }
-      else {
+      } else {
         setFixed(false);
       }
-    })
-  }, [])
+    });
+  }, []);
 
   return (
-    <header className={`bg-white dark:bg-slate-900 font-alk transition-all duration-300 ${fixed ? 'md:h-[111.883px]' : ''}`}>
-      <div className={fixed ? 'md:fixed md:animate-header md:top-0 md:left-0 md:right-0 z-40 bg-white dark:bg-slate-900 transition-all duration-300 shadow-xl' : ''}>
-        <nav className="mx-auto flex max-w-7xl items-center justify-between p-6 lg:px-8" aria-label="Global">
+    <header
+      className={`bg-white dark:bg-slate-900 font-alk transition-all duration-300 ${
+        fixed ? "md:h-[111.883px]" : ""
+      }`}
+    >
+      <div
+        className={
+          fixed
+            ? "md:fixed md:animate-header md:top-0 md:left-0 md:right-0 z-40 bg-white dark:bg-slate-900 transition-all duration-300 shadow-xl"
+            : ""
+        }
+      >
+        <nav
+          className="mx-auto flex max-w-7xl items-center justify-between p-6 lg:px-8"
+          aria-label="Global"
+        >
           <div className="flex lg:flex-1">
-            <a href="/" className="-m-1.5 p-1.5 dark:bg-white rounded-full">
+            <a href="/" className="-m-1.5 p-1.5 bg-white rounded-full">
               <img className=" w-16" src={Logo} alt="" />
             </a>
           </div>
@@ -129,14 +147,20 @@ export default function Example() {
               <Bars3Icon className="h-6 w-6" aria-hidden="true" />
             </button>
           </div>
-          <Popover.Group className="hidden lg:flex lg:gap-x-12">
-            <a href="/" className="text-sm  leading-6 text-gray-900 dark:text-white">
+          <Popover.Group className="hidden lg:flex lg:gap-x-10">
+            <a
+              href="/"
+              className="text-sm  leading-6 text-gray-900 dark:text-white"
+            >
               მთავარი
             </a>
             <Popover className="relative">
               <Popover.Button className="flex items-center gap-x-1 text-sm  leading-6 text-gray-900 dark:text-white">
                 ჩვენ შესახებ
-                <ChevronDownIcon className="h-5 w-5 flex-none text-gray-400 dark:text-white" aria-hidden="true" />
+                <ChevronDownIcon
+                  className="h-5 w-5 flex-none text-gray-400 dark:text-white"
+                  aria-hidden="true"
+                />
               </Popover.Button>
 
               <Transition
@@ -156,7 +180,10 @@ export default function Example() {
                         className="group relative flex items-center gap-x-6 rounded-lg p-4 text-sm leading-6 hover:bg-gray-50 hover:dark:bg-slate-700"
                       >
                         <div className="flex-auto">
-                          <a href={item.href} className="block  text-gray-900 dark:text-white">
+                          <a
+                            href={item.href}
+                            className="block  text-gray-900 dark:text-white"
+                          >
                             {item.name}
                             <span className="absolute inset-0" />
                           </a>
@@ -168,35 +195,91 @@ export default function Example() {
               </Transition>
             </Popover>
 
-            <a href="/news" className="text-sm  leading-6 text-gray-900 dark:text-white">
+            <a
+              href="/news"
+              className="text-sm  leading-6 text-gray-900 dark:text-white"
+            >
               სიახლეები
             </a>
-            <a href="/saturday-school" className="text-sm  leading-6 text-gray-900 dark:text-white">
-              საშაბათო სკოლა
+            <a
+              href="/projects"
+              className="text-sm  leading-6 text-gray-900 dark:text-white"
+            >
+              პროგრამები/პროექტები
             </a>
-            <a href="/exams" className="text-sm  leading-6 text-gray-900 dark:text-white">
-              მისაღები გამოცდა
+            <a
+              href="/exams"
+              className="text-sm  leading-6 text-gray-900 dark:text-white"
+            >
+              სარეკომენდაციო წერა
             </a>
-            <a href="/contact" className="text-sm  leading-6 text-gray-900 dark:text-white">
+            <Popover className="relative">
+              <Popover.Button className="flex items-center gap-x-1 text-sm  leading-6 text-gray-900 dark:text-white">
+                ბლოგები
+                <ChevronDownIcon
+                  className="h-5 w-5 flex-none text-gray-400 dark:text-white"
+                  aria-hidden="true"
+                />
+              </Popover.Button>
+
+              <Transition
+                as={Fragment}
+                enter="transition ease-out duration-200"
+                enterFrom="opacity-0 translate-y-1"
+                enterTo="opacity-100 translate-y-0"
+                leave="transition ease-in duration-150"
+                leaveFrom="opacity-100 translate-y-0"
+                leaveTo="opacity-0 translate-y-1"
+              >
+                <Popover.Panel className="absolute -left-8 top-full z-10 mt-3 dark:bg-slate-800 w-screen max-w-md overflow-hidden rounded-3xl bg-white shadow-lg ring-1 ring-gray-900/5">
+                  <div className="p-4">
+                    {teachers.map((item) => (
+                      <div
+                        key={item.name}
+                        className="group relative flex items-center gap-x-6 rounded-lg p-4 text-sm leading-6 hover:bg-gray-50 hover:dark:bg-slate-700"
+                      >
+                        <div className="flex-auto">
+                          <a
+                            href={item.href}
+                            className="block  text-gray-900 dark:text-white"
+                          >
+                            {item.name}
+                            <span className="absolute inset-0" />
+                          </a>
+                        </div>
+                      </div>
+                    ))}
+                  </div>
+                </Popover.Panel>
+              </Transition>
+            </Popover>
+            <a
+              href="/contact"
+              className="text-sm  leading-6 text-gray-900 dark:text-white"
+            >
               კონტაქტი
             </a>
-            <a href="https://www.youtube.com/@TV-ug6oo" className="text-sm  leading-6 text-gray-900 dark:text-white">
+            <a
+              href="https://www.youtube.com/@TV-ug6oo"
+              className="text-sm  leading-6 text-gray-900 dark:text-white"
+            >
               ვეკუა TV
             </a>
             <IOSSwitch onChange={() => changeTheme()} checked={checked} />
           </Popover.Group>
         </nav>
-        <Dialog as="div" className="lg:hidden" open={mobileMenuOpen} onClose={setMobileMenuOpen}>
+        <Dialog
+          as="div"
+          className="lg:hidden"
+          open={mobileMenuOpen}
+          onClose={setMobileMenuOpen}
+        >
           <div className="fixed inset-0 z-10" />
           <Dialog.Panel className="fixed inset-y-0 right-0 z-10 w-full overflow-y-auto bg-white dark:bg-slate-800 px-6 py-6 sm:max-w-sm sm:ring-1 sm:ring-gray-900/10">
             <div className="flex items-center justify-between">
               <a href="/" className="-m-1.5 p-1.5">
                 <span className="sr-only">ვეკუა 42</span>
-                <img
-                  className="h-8 w-auto"
-                  src={Logo}
-                  alt=""
-                />
+                <img className="h-8 w-auto" src={Logo} alt="" />
               </a>
               <button
                 type="button"
@@ -216,8 +299,7 @@ export default function Example() {
                   >
                     მთავარი
                   </a>
-                  {products.map(item =>
-                  (
+                  {products.map((item) => (
                     <a
                       href={item.href}
                       key={item.name}
@@ -225,24 +307,32 @@ export default function Example() {
                     >
                       {item.name}
                     </a>
-                  )
-                  )}
-                  <a href="/news" className="-mx-3 block rounded-lg px-3 py-2 text-base  leading-7 text-gray-900  hover:bg-gray-50 dark:text-white">
+                  ))}
+                  <a
+                    href="/news"
+                    className="-mx-3 block rounded-lg px-3 py-2 text-base  leading-7 text-gray-900  hover:bg-gray-50 dark:text-white"
+                  >
                     სიახლეები
                   </a>
-                  <a href="/saturday-school" className="-mx-3 block rounded-lg px-3 py-2 text-base  leading-7 text-gray-900 hover:bg-gray-50 dark:text-white">
-                    საშაბათო სკოლა
+                  <a
+                    href="/exams"
+                    className="-mx-3 block rounded-lg px-3 py-2 text-base  leading-7 text-gray-900 hover:bg-gray-50 dark:text-white"
+                  >
+                    სარეკომენდაციო წერა
                   </a>
-                  <a href="/exams" className="-mx-3 block rounded-lg px-3 py-2 text-base  leading-7 text-gray-900 hover:bg-gray-50 dark:text-white">
-                    მისაღები გამოცდა
-                  </a>
-                  <a href="/contact" className="-mx-3 block rounded-lg px-3 py-2 text-base  leading-7 text-gray-900 hover:bg-gray-50 dark:text-white">
+                  <a
+                    href="/contact"
+                    className="-mx-3 block rounded-lg px-3 py-2 text-base  leading-7 text-gray-900 hover:bg-gray-50 dark:text-white"
+                  >
                     კონტაქტი
                   </a>
-                  <a href="https://www.youtube.com/@TV-ug6oo" className="-mx-3 block rounded-lg px-3 py-2 text-base  leading-7 text-gray-900 dark:text-white hover:bg-gray-50">
+                  <a
+                    href="https://www.youtube.com/@TV-ug6oo"
+                    className="-mx-3 block rounded-lg px-3 py-2 text-base  leading-7 text-gray-900 dark:text-white hover:bg-gray-50"
+                  >
                     ვეკუა TV
                   </a>
-                  <p className='!mt-8 dark:text-white'>ბნელი რეჟიმი</p>
+                  <p className="!mt-8 dark:text-white">ბნელი რეჟიმი</p>
                   <IOSSwitch onChange={() => changeTheme()} checked={checked} />
                 </div>
               </div>
@@ -251,5 +341,5 @@ export default function Example() {
         </Dialog>
       </div>
     </header>
-  )
+  );
 }

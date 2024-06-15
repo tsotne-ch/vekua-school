@@ -15,6 +15,7 @@ import {
   limit,
 } from "firebase/firestore";
 import parse from "html-react-parser";
+import { Helmet } from "react-helmet";
 
 const Post = () => {
   const id = useParams();
@@ -42,83 +43,94 @@ const Post = () => {
   }, []);
 
   return (
-    <div className="py-20 container dark:text-white">
-      {found ? (
-        <div className="flex gap-3">
-          <div className=" w-3/4">
-            <div className="flex justify-center">
-              <img src={post.url} className="w-2/3 rounded-xl"></img>
+    <>
+      <div className=" border-b dark:border-gray-800 w-full py-1"></div>
+      <div className="py-20 container dark:text-white">
+        {found ? (
+          <>
+            <div className="flex gap-3">
+              <Helmet>
+                <title>{post.title}</title>
+              </Helmet>
+              <div className=" w-3/4">
+                <div className="flex">
+                  <img src={post.url} className="w-2/3 rounded-xl"></img>
+                </div>
+                <h1 className="font-alk text-4xl mt-5">{post.title}</h1>
+                <p className="mt-7 font-glaho gap-5 text-lg">
+                  {parse("" + post.content)}
+                </p>
+              </div>
+              <div className=" w-1/4 dark:bg-slate-900 bg-sky-100 dark:bg-blend-overlay rounded-xl dark:bg-opacity-75 bg-grid">
+                <h1 className="font-alk text-4xl mt-5 text-center mb-7">
+                  იხილეთ მეტი
+                </h1>
+                <div className="container gap-3 flex flex-col">
+                  <a
+                    href="/history"
+                    className="hover:scale-110 transition-all duration-300 ease-in-out p-3 flex flex-col items-center rounded-xl justify-center bg-white dark:bg-slate-800  shadow-xl"
+                  >
+                    <FaSchool
+                      size={"4rem"}
+                      className="text-[#0284c7] dark:text-white"
+                    />
+                    <h3 className="font-glaho text-xl mt-3 dark:text-white">
+                      ისტორია და მისია
+                    </h3>
+                  </a>
+                  <a
+                    href="/exams"
+                    className="hover:scale-110 transition-all duration-300 ease-in-out p-3 flex flex-col items-center rounded-xl justify-center bg-white dark:bg-slate-800  shadow-xl"
+                  >
+                    <PiStudentFill
+                      size={"4rem"}
+                      className="text-[#0284c7] dark:text-white"
+                    />
+                    <h3 className="font-glaho text-xl mt-3 dark:text-white">
+                      სარეკომენდაციო წერა
+                    </h3>
+                  </a>
+                  <a
+                    href="/achievments"
+                    className="hover:scale-110 transition-all duration-300 ease-in-out p-3 flex flex-col items-center rounded-xl justify-center bg-white dark:bg-slate-800 shadow-xl"
+                  >
+                    <HiMiniTrophy
+                      size={"4rem"}
+                      className="text-[#0284c7] dark:text-white"
+                    />
+                    <h3 className="font-glaho text-xl mt-3 dark:text-white">
+                      მიღწევები
+                    </h3>
+                  </a>
+                  <a
+                    href="/saturday-school"
+                    className="hover:scale-110 transition-all duration-300 ease-in-out p-3 flex flex-col items-center rounded-xl justify-center bg-white dark:bg-slate-800  shadow-xl"
+                  >
+                    <TbMathFunction
+                      size={"4rem"}
+                      className="text-[#0284c7] dark:text-white"
+                    />
+                    <h3 className="font-glaho text-xl mt-3 dark:text-white">
+                      საშაბათო სკოლა
+                    </h3>
+                  </a>
+                </div>
+              </div>
             </div>
-            <h1 className="font-alk text-4xl mt-5">{post.title}</h1>
-            <p className="mt-7 font-glaho gap-5 text-lg">
-              {parse("" + post.content)}
-            </p>
-          </div>
-          <div className=" w-1/4">
-            <h1 className="font-alk text-4xl mt-5 text-center mb-7">
-              იხილეთ მეტი
+          </>
+        ) : (
+          <>
+            <Helmet>
+              <title>404</title>
+            </Helmet>
+            <h1 className="text-7xl text-center">404</h1>
+            <h1 className="text-3xl mt-7 font-glaho text-center">
+              გვერდი ვერ მოიძებნა
             </h1>
-            <div className="container gap-3 flex flex-col">
-              <a
-                href="/history"
-                className="hover:scale-110 transition-all duration-300 ease-in-out p-3 flex flex-col items-center rounded-xl justify-center bg-white dark:bg-slate-800  shadow-xl"
-              >
-                <FaSchool
-                  size={"4rem"}
-                  className="text-[#0284c7] dark:text-white"
-                />
-                <h3 className="font-glaho text-xl mt-3 dark:text-white">
-                  ისტორია და მისია
-                </h3>
-              </a>
-              <a
-                href="/exams"
-                className="hover:scale-110 transition-all duration-300 ease-in-out p-3 flex flex-col items-center rounded-xl justify-center bg-white dark:bg-slate-800  shadow-xl"
-              >
-                <PiStudentFill
-                  size={"4rem"}
-                  className="text-[#0284c7] dark:text-white"
-                />
-                <h3 className="font-glaho text-xl mt-3 dark:text-white">
-                  მოსწავლეების მიღება
-                </h3>
-              </a>
-              <a
-                href="#"
-                className="hover:scale-110 transition-all duration-300 ease-in-out p-3 flex flex-col items-center rounded-xl justify-center bg-white dark:bg-slate-800 shadow-xl"
-              >
-                <HiMiniTrophy
-                  size={"4rem"}
-                  className="text-[#0284c7] dark:text-white"
-                />
-                <h3 className="font-glaho text-xl mt-3 dark:text-white">
-                  მიღწევები
-                </h3>
-              </a>
-              <a
-                href="/saturday-school"
-                className="hover:scale-110 transition-all duration-300 ease-in-out p-3 flex flex-col items-center rounded-xl justify-center bg-white dark:bg-slate-800  shadow-xl"
-              >
-                <TbMathFunction
-                  size={"4rem"}
-                  className="text-[#0284c7] dark:text-white"
-                />
-                <h3 className="font-glaho text-xl mt-3 dark:text-white">
-                  საშაბათო სკოლა
-                </h3>
-              </a>
-            </div>
-          </div>
-        </div>
-      ) : (
-        <>
-          <h1 className="text-7xl text-center">404</h1>
-          <h1 className="text-3xl mt-7 font-glaho text-center">
-            გვერდი ვერ მოიძებნა
-          </h1>
-        </>
-      )}
-    </div>
+          </>
+        )}
+      </div>
+    </>
   );
 };
 
