@@ -23,6 +23,8 @@ dotenv.config();
 app.use(
   cors({
     origin: "https://vekua-client.vercel.app",
+    methods: ["POST", "GET"],
+    credentials: true,
   })
 );
 app.use(express.json());
@@ -37,6 +39,10 @@ const uri = `mongodb+srv://${process.env.key}@vekuacluster.suzebxd.mongodb.net/?
 
 mongoose.connect(uri).then(() => {
   console.log("Connected to MongoDB");
+});
+
+app.get("/", (req, res) => {
+  res.send("Server up and running!");
 });
 
 app.post("/addstudent", async (req, res) => {
