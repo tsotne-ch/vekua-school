@@ -22,6 +22,7 @@ import {
 import Card from "./Card";
 import axios from "axios";
 import { firestore, storage, auth } from "../firebase/firebase.config";
+import { Helmet } from "react-helmet";
 
 const Exam = () => {
   let [open, setOpen] = useState(false);
@@ -411,6 +412,9 @@ const Exam = () => {
 
   return (
     <div className="items-center container dark:text-white py-20">
+      <Helmet>
+        <title>სარეკომენდაციო წერა</title>
+      </Helmet>
       {exam ? (
         <Testdiv />
       ) : (

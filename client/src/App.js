@@ -16,6 +16,9 @@ import Students from "./pages/Students";
 import Card from "./pages/Card";
 import { PDFViewer } from "@react-pdf/renderer";
 import Post from "./pages/Post";
+import Projects from "./pages/Projects";
+import Project from "./pages/Project";
+import Achievments from "./pages/Achievments";
 
 function App() {
   return (
@@ -34,6 +37,9 @@ function App() {
             <Route path="/news" element={<News />} />
             <Route path="/news/:id" element={<Post />} />
             <Route path="/plan" element={<Plan />} />
+            <Route path="/projects" element={<Projects />} />
+            <Route path="/achievments" element={<Achievments />} />
+            <Route path="/projects/:id" element={<Project />} />
             {/* <Route path="/student/:code" element={<Students />} /> */}
             <Route
               path="*"

@@ -16,6 +16,7 @@ import {
 } from "firebase/firestore";
 import { Pagination } from "flowbite-react";
 import { useState } from "react";
+import { Helmet } from "react-helmet";
 
 const News = () => {
   const [currentPage, setCurrentPage] = useState(1);
@@ -53,6 +54,9 @@ const News = () => {
   return (
     <>
       <Banner heading="სიახლეები" />
+      <Helmet>
+        <title>სიახლეები</title>
+      </Helmet>
       <div className="py-20 container">
         <div className="flex flex-col lg:flex-row">
           <div className="lg:basis-1/4 p-4 justify-center flex">
