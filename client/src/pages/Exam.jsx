@@ -275,7 +275,7 @@ const Exam = () => {
                   id="file2"
                   name="img"
                   helperText=""
-                  accept="image/png, image/gif, image/jpeg"
+                  accept="image/png, image/jpg, image/jpeg"
                 />
               </div>
               <div>
