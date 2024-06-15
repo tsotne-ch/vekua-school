@@ -1,0 +1,21 @@
+import React from 'react'
+
+const FBanner = () => {
+    return (
+        <div className='bg-cover bg-center flex items-center bg-black bg-blend-overlay bg-opacity-25 h-[calc(100dvh-111px)] bg-header-image '>
+            <div className='py-5 w-full bg-black bg-opacity-30'>
+                <div className='container'>
+                    <h1 className='text-white font-alk text-6xl animate-floatIn'>
+                        ილია ვეკუას სახელობის
+
+                    </h1>
+                    <h1 className='text-white font-alk text-2xl opacity-0 animate-floatLater mt-4'>
+                        ფიზიკა-მათემატიკურად გაძლიერებული საჯარო სკოლა N42
+                    </h1>
+                </div>
+            </div>
+        </div>
+    )
+}
+
+export default FBanner

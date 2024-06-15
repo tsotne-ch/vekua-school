@@ -1,0 +1,40 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+::-moz-selection {
+  /* Code for Firefox */
+  background: rgba(81, 148, 255, 0.422);
+}
+
+::selection {
+  background: rgba(81, 148, 255, 0.422);
+}
+
+@layer components {
+  .container {
+    @apply px-4 self-center;
+  }
+}
+
+img {
+  display: inline;
+  margin: 0 2px;
+}
+
+/* ::-webkit-scrollbar {
+    width: 6px;
+    max-height: 30px;
+}
+
+::-webkit-scrollbar-thumb {
+    background: #ff0000;
+    border-radius: 45px;
+}
+::-webkit-scrollbar-track-piece:start{
+    background-color: transparent;
+}
+
+::-webkit-scrollbar-track-piece:end{
+    background-color: transparent;
+} */
