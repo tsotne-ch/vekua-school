@@ -20,7 +20,11 @@ const axios = require("axios");
 
 dotenv.config();
 
-app.use(cors());
+app.use(
+  cors({
+    origin: "https://vekua-client.vercel.app",
+  })
+);
 app.use(express.json());
 app.use(
   express.urlencoded({
