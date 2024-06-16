@@ -32,7 +32,7 @@ const styles = StyleSheet.create({
 
 const Card = ({ student, image }) => {
   return (
-    <Document style={{ height: "100%" }}>
+    <Document style={{ height: "100%", backgroundColor: "white" }}>
       <Page size="A4" style={styles.page}>
         <View style={styles.section}>
           <Image src={"/vekua_simplified.png"} style={styles.image} />
@@ -58,17 +58,17 @@ const Card = ({ student, image }) => {
               marginTop: 10,
             }}
           >
-            მოსწავლის საგამოცდო საბუთი
+            მოსწავლის რეგისტრაციის ბარათი
           </Text>
-          <View style={{ display: "flex", flexDirection: "row" }}>
+          <View style={{ display: "flex", flexDirection: "row", gap: 10 }}>
             <View>
-              <Image source={image} style={{ width: 150, marginTop: 15 }} />
+              <Image source={image} style={{ height: 135, marginTop: 15 }} />
             </View>
             <View style={{ flexGrow: 1 }}>
               <Text
                 style={{ fontFamily: "glaho", fontSize: 13, marginTop: 20 }}
               >
-                მოსწავლის საგამოცდო კოდი
+                რეგისტრაციის კოდი
               </Text>
               <Text style={{ fontFamily: "glaho", fontSize: 24 }}>
                 {student.code}
@@ -109,7 +109,8 @@ const Card = ({ student, image }) => {
           </Text>
 
           <Text style={{ fontSize: 9 }}>
-            • გამოცხადდეს 30 წუთით ადრე სარეგისტრაციო ბარათით;
+            • სარეკომენდაციო წერაზე, სარეგისტრაციო ბარათით, 30 წუთით ადრე
+            გამოცხადდეს;
           </Text>
           <Text style={{ fontSize: 9 }}>
             • ჰქონდეს საწერი კალამი, სახაზავი, ფანქარი, საშლელი
@@ -135,7 +136,7 @@ const Card = ({ student, image }) => {
             სარეკომენდაციო წერაზე გამომსვლელს ეკრძალება:
           </Text>
 
-          <Text style={{ fontSize: 9 }}>• თან მობილური ტელეფონი ჰქონდეს;</Text>
+          <Text style={{ fontSize: 9 }}>• თან ჰქონდეს მობილური ტელეფონი;</Text>
           <Text style={{ fontSize: 9 }}>
             • გამოიყენოს ნებისმიერი საინფორმაციო წყარო;
           </Text>

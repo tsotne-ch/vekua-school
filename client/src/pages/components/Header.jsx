@@ -117,14 +117,14 @@ export default function Example() {
 
   return (
     <header
-      className={`bg-white dark:bg-slate-900 font-alk transition-all duration-300 ${
+      className={`bg-sky-200 dark:bg-slate-900 font-alk transition-all duration-300 ${
         fixed ? "md:h-[111.883px]" : ""
       }`}
     >
       <div
         className={
           fixed
-            ? "md:fixed md:animate-header md:top-0 md:left-0 md:right-0 z-40 bg-white dark:bg-slate-900 transition-all duration-300 shadow-xl"
+            ? "md:fixed md:animate-header md:top-0 md:left-0 md:right-0 z-40 bg-sky-200 dark:bg-slate-900 transition-all duration-300 shadow-xl"
             : ""
         }
       >
@@ -132,9 +132,9 @@ export default function Example() {
           className="mx-auto flex max-w-7xl items-center justify-between p-6 lg:px-8"
           aria-label="Global"
         >
-          <div className="flex lg:flex-1">
-            <a href="/" className="-m-1.5 p-1.5 bg-white rounded-full">
-              <img className=" w-16" src={Logo} alt="" />
+          <div className="flex flex-1 h-[4.5rem]">
+            <a href="/" className="p-1 h-full bg-white rounded-full">
+              <img className=" h-full" src={Logo} alt="" />
             </a>
           </div>
           <div className="flex lg:hidden">
@@ -147,7 +147,7 @@ export default function Example() {
               <Bars3Icon className="h-6 w-6" aria-hidden="true" />
             </button>
           </div>
-          <Popover.Group className="hidden lg:flex lg:gap-x-10">
+          <Popover.Group className="w-[92%] justify-between hidden lg:flex lg:gap-x-10">
             <a
               href="/"
               className="text-sm  leading-6 text-gray-900 dark:text-white"
