@@ -8,13 +8,13 @@ const Footer = () => {
   const currentDate = new Date();
 
   return (
-    <footer className="shadow-inner dark:bg-slate-800 transition-all duration-300">
+    <footer className="shadow-inner dark:bg-slate-800 bg-sky-100 transition-all duration-300">
       <div className="container py-8">
         <div className="w-full mb-4">
           <img
             src={Logo}
             alt="logo"
-            className=" w-24 dark:bg-white dark:rounded-full p-1"
+            className=" w-24 bg-white rounded-full p-1"
           />
         </div>
         <div className="flex md:flex-row flex-col gap-8">
