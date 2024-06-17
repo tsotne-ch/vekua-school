@@ -275,7 +275,7 @@ export default function Example() {
           onClose={setMobileMenuOpen}
         >
           <div className="fixed inset-0 z-10" />
-          <Dialog.Panel className="fixed inset-y-0 right-0 z-10 w-full overflow-y-auto bg-white dark:bg-slate-800 px-6 py-6 sm:max-w-sm sm:ring-1 sm:ring-gray-900/10">
+          <Dialog.Panel className="fixed inset-y-0 right-0 z-20 w-full overflow-y-auto bg-white dark:bg-slate-800 px-6 py-6 sm:max-w-sm sm:ring-1 sm:ring-gray-900/10">
             <div className="flex items-center justify-between">
               <a href="/" className="-m-1.5 p-1.5">
                 <span className="sr-only">ვეკუა 42</span>
@@ -315,6 +315,12 @@ export default function Example() {
                     სიახლეები
                   </a>
                   <a
+                    href="/projects"
+                    className="-mx-3 block rounded-lg px-3 py-2 text-base  leading-7 text-gray-900  hover:bg-gray-50 dark:text-white"
+                  >
+                    პროგრამები/პროექტები
+                  </a>
+                  <a
                     href="/exams"
                     className="-mx-3 block rounded-lg px-3 py-2 text-base  leading-7 text-gray-900 hover:bg-gray-50 dark:text-white"
                   >
@@ -326,6 +332,15 @@ export default function Example() {
                   >
                     კონტაქტი
                   </a>
+                  {teachers.map((item) => (
+                    <a
+                      href={item.href}
+                      key={item.name}
+                      className="-mx-3 block rounded-lg px-3 py-2 text-base  leading-7 text-gray-900 dark:text-white hover:bg-gray-50"
+                    >
+                      {item.name}
+                    </a>
+                  ))}
                   <a
                     href="https://www.youtube.com/@TV-ug6oo"
                     className="-mx-3 block rounded-lg px-3 py-2 text-base  leading-7 text-gray-900 dark:text-white hover:bg-gray-50"
