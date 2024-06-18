@@ -13,7 +13,6 @@ const Students = () => {
     axios
       .get("http://localhost:8080/findstudent/" + code)
       .then((res) => {
-        console.log(res);
         setStudent(res.data);
         setLoaded(true);
         setFound(true);
