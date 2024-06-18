@@ -24,13 +24,11 @@ const Post = () => {
   const [found, setFound] = useState(true);
 
   const getPost = async () => {
-    console.log(id.id);
     const q = query(
       collection(firestore, "posts"),
       where(firebase.firestore.FieldPath.documentId(), "==", id.id)
     );
     const querySnapshot = await getDocs(q);
-    console.log(querySnapshot.docs.length);
     if (!querySnapshot.docs.length) {
       setFound(false);
       return;

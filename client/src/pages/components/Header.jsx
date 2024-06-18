@@ -86,7 +86,7 @@ export default function Example() {
 
   useEffect(() => {
     setTheme(localStorage.theme);
-    if (theme === "light") {
+    if (theme === "light" || !localStorage.theme) {
       document.documentElement.classList.remove("dark");
       setChecked(false);
     } else {
@@ -96,7 +96,7 @@ export default function Example() {
   }, [theme]);
 
   function changeTheme() {
-    if (theme === "light") {
+    if (theme === "light" || !localStorage.theme) {
       setTheme("dark");
       localStorage.setItem("theme", "dark");
     } else {
@@ -117,14 +117,14 @@ export default function Example() {
 
   return (
     <header
-      className={`bg-sky-200 dark:bg-slate-900 font-alk transition-all duration-300 ${
+      className={`bg-sky-100 dark:bg-slate-900 font-alk transition-all duration-300 ${
         fixed ? "md:h-[111.883px]" : ""
       }`}
     >
       <div
         className={
           fixed
-            ? "md:fixed md:animate-header md:top-0 md:left-0 md:right-0 z-40 bg-sky-200 dark:bg-slate-900 transition-all duration-300 shadow-xl"
+            ? "md:fixed md:animate-header md:top-0 md:left-0 md:right-0 z-40 bg-sky-100 dark:bg-slate-900 transition-all duration-300 shadow-xl"
             : ""
         }
       >
@@ -147,7 +147,7 @@ export default function Example() {
               <Bars3Icon className="h-6 w-6" aria-hidden="true" />
             </button>
           </div>
-          <Popover.Group className="w-[92%] justify-between hidden lg:flex lg:gap-x-10">
+          <Popover.Group className="w-[86%] justify-between hidden lg:flex lg:gap-x-10">
             <a
               href="/"
               className="text-sm  leading-6 text-gray-900 dark:text-white"
@@ -206,12 +206,6 @@ export default function Example() {
               className="text-sm  leading-6 text-gray-900 dark:text-white"
             >
               პროგრამები/პროექტები
-            </a>
-            <a
-              href="/exams"
-              className="text-sm  leading-6 text-gray-900 dark:text-white"
-            >
-              სარეკომენდაციო წერა
             </a>
             <Popover className="relative">
               <Popover.Button className="flex items-center gap-x-1 text-sm  leading-6 text-gray-900 dark:text-white">
@@ -319,12 +313,6 @@ export default function Example() {
                     className="-mx-3 block rounded-lg px-3 py-2 text-base  leading-7 text-gray-900  hover:bg-gray-50 dark:text-white"
                   >
                     პროგრამები/პროექტები
-                  </a>
-                  <a
-                    href="/exams"
-                    className="-mx-3 block rounded-lg px-3 py-2 text-base  leading-7 text-gray-900 hover:bg-gray-50 dark:text-white"
-                  >
-                    სარეკომენდაციო წერა
                   </a>
                   <a
                     href="/contact"

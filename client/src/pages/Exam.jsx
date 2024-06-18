@@ -50,7 +50,6 @@ const Exam = () => {
 
   const submit = (e) => {
     e.preventDefault();
-    console.log(e.target.fname.value);
     const obj = {
       name: e.target.fname.value,
       surname: e.target.fsurname.value,
@@ -78,11 +77,9 @@ const Exam = () => {
 
         obj.img = imgUrl;
         obj.file = fileUrl;
-        console.log(obj);
         axios
           .post(process.env.REACT_APP_SERVERURL + "/addstudent", obj)
           .then((res) => {
-            console.log(res.data);
             setData(res.data);
             setOpenS(true);
             axios
@@ -105,7 +102,6 @@ const Exam = () => {
           .catch((err) => {
             console.log(err);
             setErr(true);
-            console.log(err.response.data.code);
             if (err.response.data.code == "11000") {
               seterrormsg("მოსწავლე ამ პირადი ნომრით უკვე რეგისტრირებულია");
               seterrval(11000);
@@ -121,7 +117,6 @@ const Exam = () => {
       .catch((err) => {
         console.log(err);
         setErr(true);
-        console.log(err.response.data.code);
         if (err.response.data.code == "11000") {
           seterrormsg("მოსწავლე ამ პირადი ნომრით უკვე რეგისტრირებულია");
           seterrval(11000);
@@ -152,7 +147,6 @@ const Exam = () => {
             image: res.data.img,
           })
           .then((resp) => {
-            console.log(resp.data.image);
             const pdfBlob = pdf(
               <Card student={res.data} image={resp.data.image} />
             )
@@ -178,7 +172,7 @@ const Exam = () => {
         return (
           <>
             <h1 className="mb-10 font-glaho text-3xl text-center">
-              მისაღები გამოცდისთვის ონლაინ რეგისტრაცია
+              სარეკომენდაციო წერისთვის ონლაინ რეგისტრაცია
             </h1>
             <p className="mb-10 font-glaho text-xl text-center">
               მოსწავლის რეგისტრაციისას ეკრანზე გამოჩნდება რეგისტრირებული
