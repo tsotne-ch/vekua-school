@@ -1,16 +1,56 @@
-import React from "react";
+import React, { useState } from "react";
 import { Button, Checkbox, Label, TextInput, Textarea } from "flowbite-react";
 import { HiMail } from "react-icons/hi";
 import { HiPhone } from "react-icons/hi2";
 import { Helmet } from "react-helmet";
+import { auth, firestore, firebase } from "../firebase/firebase.config";
+import {
+  collection,
+  query,
+  where,
+  getDocs,
+  orderBy,
+  limit,
+  addDoc,
+} from "firebase/firestore";
+import Swal from "sweetalert2";
 
 const Contact = () => {
+  const [count, setCount] = useState(0);
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+
+    const q = query(collection(firestore, "messages"));
+    const querySnapshot = await getDocs(q);
+    let list = [];
+    querySnapshot.forEach((doc) => {
+      list.push({ info: doc.data(), id: doc.id });
+    });
+    setCount(list.length);
+
+    console.log(list.length);
+    const messageRef = await addDoc(collection(firestore, "messages"), {
+      name: e.target.name.value,
+      status: "active",
+      title: e.target.title.value,
+      mobileNumber: e.target.phone.value,
+      email: e.target.email.value,
+      content: e.target.content.value,
+      code: list.length + 1,
+    }).then(() => {
+      Swal.fire("წარმატება!", "წერილი წარმატებით გაიგზავნა", "success");
+    });
+  };
+
   return (
     <div className="py-20 container">
       <Helmet>
         <title>კონტაქტი</title>
       </Helmet>
-      <form className="flex m-auto max-w-3xl flex-col gap-4 rounded-xl">
+      <form
+        className="flex m-auto max-w-3xl flex-col gap-4 rounded-xl"
+        onSubmit={handleSubmit}
+      >
         <h1 className="text-3xl font-alk text-center mb-3 dark:text-white">
           კონტაქტი
         </h1>
@@ -26,7 +66,13 @@ const Contact = () => {
           <div className="mb-2 block">
             <Label htmlFor="namr" value="სახელი" />
           </div>
-          <TextInput id="name" autoComplete="false" type="text" required />
+          <TextInput
+            id="name"
+            autoComplete="false"
+            name="name"
+            type="text"
+            required
+          />
         </div>
         <div>
           <div className="mb-2 block">
@@ -35,6 +81,7 @@ const Contact = () => {
           <TextInput
             id="email2"
             type="email"
+            name="email"
             icon={HiMail}
             autoComplete={false}
             placeholder="name@email.com"
@@ -50,6 +97,8 @@ const Contact = () => {
             autoComplete="false"
             icon={HiPhone}
             type="text"
+            name="phone"
+            maxLength={9}
             placeholder="+995-5..."
             required
           />
@@ -58,7 +107,13 @@ const Contact = () => {
           <div className="mb-2 block">
             <Label htmlFor="header" value="სათაური" />
           </div>
-          <TextInput id="header" autoComplete="false" type="text" required />
+          <TextInput
+            id="header"
+            name="title"
+            autoComplete="false"
+            type="text"
+            required
+          />
         </div>
         <div>
           <div className="mb-2 block">
@@ -68,6 +123,7 @@ const Contact = () => {
             id="comment"
             placeholder="დატოვეთ შეეტყობინება..."
             required
+            name="content"
             rows={4}
           />
         </div>

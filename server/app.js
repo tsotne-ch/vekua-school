@@ -97,7 +97,7 @@ app.get("/findstudent/:id", async (req, res) => {
     if (!student) {
       student = await saturdayModel.findOne({ id: req.params.id });
       if (!student) {
-        res.status(500).json({ err: "err" });
+        return res.status(400).json({ err: "err" });
       }
     }
     res.json(student);
