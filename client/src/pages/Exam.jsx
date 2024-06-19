@@ -23,6 +23,7 @@ import Card from "./Card";
 import axios from "axios";
 import { firestore, storage, auth } from "../firebase/firebase.config";
 import { Helmet } from "react-helmet";
+import Swal from "sweetalert2";
 
 const Exam = () => {
   let [open, setOpen] = useState(false);
@@ -62,6 +63,15 @@ const Exam = () => {
       phone: e.target.phone.value,
     };
 
+    Swal.fire({
+      title: "<p class='font-glaho'>იტვირთება</p>",
+      html: "<p class='font-glaho'>გთხოვთ დაიცადოთ, მოსწავლე რეგისტრირდება</p>",
+      allowOutsideClick: false,
+      didOpen: () => {
+        Swal.showLoading();
+      },
+    });
+
     axios
       .get(process.env.REACT_APP_SERVERURL + "/check/" + e.target.id.value)
       .then(async (resp) => {
@@ -80,6 +90,7 @@ const Exam = () => {
         axios
           .post(process.env.REACT_APP_SERVERURL + "/addstudent", obj)
           .then((res) => {
+            Swal.close();
             setData(res.data);
             setOpenS(true);
             axios
@@ -101,7 +112,18 @@ const Exam = () => {
           })
           .catch((err) => {
             console.log(err);
+            Swal.close();
             setErr(true);
+            if (!err.response) {
+              Swal.fire({
+                icon: "error",
+                title: "შეცდომა",
+                text: "მოსწავლის რეგისტრაციის დროს მოულოდნელი შეცდომა დაფიქსირდა.",
+                footer:
+                  "ყველა ველი შეავსეთ? გთხოვთ სცადოთ მოგვიანებით ან დაგვიკავშირდით სკოლის ნომერზე ან ელ-ფოსტაზე",
+              });
+              return;
+            }
             if (err.response.data.code == "11000") {
               seterrormsg("მოსწავლე ამ პირადი ნომრით უკვე რეგისტრირებულია");
               seterrval(11000);
@@ -115,8 +137,21 @@ const Exam = () => {
           });
       })
       .catch((err) => {
+        Swal.close();
         console.log(err);
         setErr(true);
+
+        if (!err.response) {
+          Swal.fire({
+            icon: "error",
+            title: "შეცდომა",
+            text: "მოსწავლის რეგისტრაციის დროს მოულოდნელი შეცდომა დაფიქსირდა.",
+            footer:
+              "ყველა ველი შეავსეთ? გთხოვთ სცადოთ მოგვიანებით ან დაგვიკავშირდით სკოლის ნომერზე ან ელ-ფოსტაზე",
+          });
+          return;
+        }
+
         if (err.response.data.code == "11000") {
           seterrormsg("მოსწავლე ამ პირადი ნომრით უკვე რეგისტრირებულია");
           seterrval(11000);
@@ -246,6 +281,8 @@ const Exam = () => {
                   id="id1"
                   type="text"
                   name="id"
+                  minLength={11}
+                  maxLength={11}
                   required
                 />
               </div>
@@ -259,6 +296,7 @@ const Exam = () => {
                 <FileInput
                   id="file"
                   name="file"
+                  required
                   helperText="აუცილებელია ატვირთოთ სკოლის ცნობა"
                 />
               </div>
@@ -270,6 +308,7 @@ const Exam = () => {
                   id="file2"
                   name="img"
                   helperText=""
+                  required
                   accept="image/png, image/jpg, image/jpeg"
                 />
               </div>
@@ -279,7 +318,7 @@ const Exam = () => {
                 </div>
                 <TextInput
                   id="id2"
-                  type="text"
+                  type="email"
                   name="email"
                   placeholder="mymail@vekua42.edu.ge"
                   required
@@ -304,6 +343,7 @@ const Exam = () => {
                 <TextInput
                   id="id3"
                   maxLength={9}
+                  minLength={9}
                   type="text"
                   placeholder="599000000"
                   name="phone"
