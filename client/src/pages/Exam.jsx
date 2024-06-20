@@ -27,7 +27,7 @@ import Swal from "sweetalert2";
 
 const Exam = () => {
   let [open, setOpen] = useState(false);
-  let [exam, setExam] = useState(true);
+  let [exam, setExam] = useState(false);
   let [phase, setPhase] = useState(0);
   let [data, setData] = useState({
     code: "7-001",
@@ -453,12 +453,13 @@ const Exam = () => {
         <Testdiv />
       ) : (
         <div className="flex flex-col items-center">
-          <h1 className="mb-3 font-alk text-3xl text-center">
-            მისაღები გამოცდები დასრულებულია
+          <h1 className="mb-3 font-alk text-5xl text-center">
+            სარეკომენდაციო წერა
           </h1>
-          <h4 className="mb-3 font-alk text-lg text-center">
-            შემდეგი მიღება გაგრძელდება ივლისში
+          <h4 className="mb-3 mt-10 font-glaho text-2xl text-center">
+            სარეკომენდაციო წერისთვის ონლაინ რეგისტრაცია დაიწყება 26 ივნისს.
           </h4>
+          <p className="font-glaho">2024 წ.</p>
           <FcGraduationCap size={"8.5rem"} />
         </div>
       )}
