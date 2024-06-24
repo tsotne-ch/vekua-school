@@ -32,7 +32,7 @@ const Home = () => {
               className="text-[#0284c7] dark:text-white"
             />
             <h3 className="font-glaho text-xl mt-3 dark:text-white">
-              მოსწავლეების მიღება
+              სარეკომენდაციო წერა
             </h3>
           </a>
           <a

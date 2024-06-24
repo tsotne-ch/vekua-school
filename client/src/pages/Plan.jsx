@@ -27,7 +27,7 @@ const Policy = () => {
         </h2>
 
         <div className="flex justify-center mt-5">
-          <Button color="blue" href="/სასკოლო_სასწავლო_გეგმა.pdf" download="">
+          <Button color="blue" href="/plan.pdf" download="">
             <FaDownload size={"1.1rem"} className="mr-3" /> სასწავლო გეგმის
             გადმოწერა
           </Button>

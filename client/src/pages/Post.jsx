@@ -46,20 +46,23 @@ const Post = () => {
       <div className="py-20 container dark:text-white">
         {found ? (
           <>
-            <div className="flex gap-3">
+            <div className="flex flex-col md:flex-row gap-3">
               <Helmet>
                 <title>{post.title}</title>
               </Helmet>
-              <div className=" w-3/4">
+              <div className=" md:w-3/4">
                 <div className="flex">
-                  <img src={post.url} className="w-2/3 rounded-xl"></img>
+                  <img
+                    src={post.url}
+                    className="md:w-2/3 w-full rounded-xl"
+                  ></img>
                 </div>
                 <h1 className="font-alk text-4xl mt-5">{post.title}</h1>
                 <p className="mt-7 font-glaho gap-5 text-lg">
                   {parse("" + post.content)}
                 </p>
               </div>
-              <div className=" w-1/4 dark:bg-slate-900 bg-sky-100 dark:bg-blend-overlay rounded-xl dark:bg-opacity-75 bg-grid">
+              <div className=" md:w-1/4 dark:bg-slate-900 bg-sky-100 dark:bg-blend-overlay rounded-xl dark:bg-opacity-75 bg-grid">
                 <h1 className="font-alk text-4xl mt-5 text-center mb-7">
                   იხილეთ მეტი
                 </h1>

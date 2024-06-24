@@ -207,7 +207,7 @@ const Exam = () => {
         return (
           <>
             <h1 className="mb-10 font-glaho text-3xl text-center">
-              სარეკომენდაციო წერისთვის ონლაინ რეგისტრაცია
+              ონლაინ რეგისტრაცია სარეკომენდაციო წერისთვის
             </h1>
             <p className="mb-10 font-glaho text-xl text-center">
               მოსწავლის რეგისტრაციისას ეკრანზე გამოჩნდება რეგისტრირებული
@@ -449,22 +449,67 @@ const Exam = () => {
       <Helmet>
         <title>სარეკომენდაციო წერა</title>
       </Helmet>
-      {exam ? (
+      {/* {exam ? (
         <Testdiv />
       ) : (
         <div className="flex flex-col items-center">
-          <h1 className="mb-3 font-alk text-3xl text-center">
-            მისაღები გამოცდები დასრულებულია
+          <h1 className="mb-3 font-alk text-5xl text-center">
+            სარეკომენდაციო წერა
           </h1>
-          <h4 className="mb-3 font-alk text-lg text-center">
-            შემდეგი მიღება გაგრძელდება ივლისში
+          <h4 className="mb-3 mt-10 font-glaho text-2xl text-center">
+            სარეკომენდაციო წერისთვის ონლაინ რეგისტრაცია დაიწყება 26 ივნისს.
           </h4>
+          <p className="font-glaho">2024 წ.</p>
           <FcGraduationCap size={"8.5rem"} />
         </div>
-      )}
+      )} */}
+
+      <div className="flex flex-col items-center">
+        <h1 className="mb-3 font-alk text-5xl text-center">
+          სარეკომენდაციო წერა
+        </h1>
+        <h4 className="mb-3 mt-10 font-glaho text-2xl text-center">
+          ონლაინ რეგისტრაცია სარეკომენდაციო წერისთვის დაიწყება 26 ივნისს.
+        </h4>
+        <p className="font-glaho">
+          დეტალური ინფორმაცია სარეკომენდაციო წერებზე შეგიძლიათ იხილოთ სიახლეების
+          ველში
+        </p>
+        <FcGraduationCap size={"8.5rem"} />
+      </div>
 
       <h2 className="mt-32 text-center text-3xl font-glaho">
-        სკოლაში მისაღები საგამოცდო ნიმუშები
+        პროგრამები კლასების მიხედვით
+      </h2>
+      <div className="grid mt-10 md:grid-cols-2 gap-5">
+        <div className="p-3 flex flex-col items-center gap-4">
+          <Button
+            color="gray"
+            className="lg:w-1/3 md:w-1/2 w-full"
+            href="/mathprogram.pdf"
+          >
+            მათემატიკა
+          </Button>
+          <h3 className="text-center text-lg font-glaho">
+            VII, VIII, IX, X და XI კლასებისთვის
+          </h3>
+        </div>
+        <div className="p-3 flex flex-col items-center gap-4">
+          <Button
+            color="gray"
+            className="lg:w-1/3 md:w-1/2 w-full"
+            href="/physicsprogram.pdf"
+          >
+            ფიზიკა
+          </Button>
+          <h3 className="text-center text-lg font-glaho">
+            VIII, IX, X და XI კლასებისთვის
+          </h3>
+        </div>
+      </div>
+
+      <h2 className="mt-16 text-center text-3xl font-glaho">
+        სარეკომენდაციო წერის ნიმუშები
       </h2>
       <div className="grid md:grid-cols-2 gap-5">
         <div className="p-3 flex flex-col items-center gap-4">

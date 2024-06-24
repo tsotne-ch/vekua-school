@@ -1,6 +1,7 @@
 {
   "name": "vekua",
   "version": "0.1.0",
+  "homepage": "https://beta.vekua42.edu.ge",
   "private": true,
   "dependencies": {
     "@emotion/react": "^11.11.3",
