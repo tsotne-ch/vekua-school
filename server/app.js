@@ -16,7 +16,8 @@ const saturdayModel = mongoose.model(
 );
 const { ObjectId } = mongoose.Types;
 const app = express();
-const axios = require("axios");
+const fetch = (...args) =>
+  import("node-fetch").then(({ default: fetch }) => fetch(...args));
 
 dotenv.config();
 
@@ -29,7 +30,7 @@ app.use(
 );
 app.listen(8080);
 
-const uri = `mongodb+srv://${process.env.key}@vekuacluster.suzebxd.mongodb.net/?retryWrites=true&w=majority&appName=vekuacluster`;
+const uri = `mongodb+srv://thatkidplayers:5gXk9JdI9VDCiXPc@vekuacluster.suzebxd.mongodb.net/?retryWrites=true&w=majority&appName=vekuacluster`;
 
 mongoose.connect(uri).then(() => {
   console.log("Connected to MongoDB");
@@ -129,13 +130,18 @@ app.get("/check/:id", async (req, res) => {
 
 app.post("/loadimages", async (req, res) => {
   try {
-    let imageurl = req.body.image;
-    const response = await axios.get(imageurl, {
-      responseType: "arraybuffer",
-    });
-    const imageBuffer = Buffer.from(response.data, "binary");
+    const imageurl = req.body.image;
+    const response = await fetch(imageurl);
+
+    if (!response.ok) {
+      throw new Error("Network response was not ok");
+    }
+
+    const contentType = response.headers.get("content-type");
+    const arrayBuffer = await response.arrayBuffer();
+    const imageBuffer = Buffer.from(arrayBuffer);
     const base64Image = imageBuffer.toString("base64");
-    const image = `data:${response.headers["content-type"]};base64,${base64Image}`;
+    const image = `data:${contentType};base64,${base64Image}`;
 
     res.json({ image });
   } catch (error) {
