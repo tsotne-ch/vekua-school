@@ -30,7 +30,7 @@ app.use(
 );
 app.listen(8080);
 
-const uri = `mongodb+srv://thatkidplayers:5gXk9JdI9VDCiXPc@vekuacluster.suzebxd.mongodb.net/?retryWrites=true&w=majority&appName=vekuacluster`;
+const uri = `mongodb+srv://${process.env.key}@vekuacluster.suzebxd.mongodb.net/?retryWrites=true&w=majority&appName=vekuacluster`;
 
 mongoose.connect(uri).then(() => {
   console.log("Connected to MongoDB");
