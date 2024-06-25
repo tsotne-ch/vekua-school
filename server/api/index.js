@@ -81,6 +81,7 @@ app.post("/addstudent", async (req, res) => {
       class: req.body.class,
       phone: req.body.phone,
       email: req.body.email,
+      language: req.body.language,
     });
 
     await student.save();
