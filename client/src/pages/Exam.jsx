@@ -49,6 +49,9 @@ const Exam = () => {
   let [img, setImg] = useState(null);
   let [file, setFile] = useState(null);
 
+  let [imgerr, setImgerr] = useState(null);
+  let [fileval, setFileval] = useState(null);
+
   const submit = (e) => {
     e.preventDefault();
     const obj = {
@@ -201,6 +204,26 @@ const Exam = () => {
       });
   };
 
+  const onImgUpload = (e) => {
+    const file = e.target.files[0];
+
+    if (file.size > 3145728) {
+      e.target.value = "";
+      setImgerr("მოსწავლის ფოტო არ უნდა აჭარბებდეს 3 MB-ს");
+      console.log("LIMIT");
+    }
+  };
+
+  const onFileUpload = (e) => {
+    const file = e.target.files[0];
+
+    if (file.size > 5242880) {
+      e.target.value = "";
+      setFileval("სკოლის ცნობა არ უნდა აჭარბებდეს 5 MB-ს");
+      console.log("LIMIT");
+    }
+  };
+
   const Testdiv = () => {
     switch (phase) {
       case 0:
@@ -211,8 +234,9 @@ const Exam = () => {
             </h1>
             <p className="mb-10 font-glaho text-xl text-center">
               მოსწავლის რეგისტრაციისას ეკრანზე გამოჩნდება რეგისტრირებული
-              მოსწავლის კოდი რომელიც დაგჭირდებათ გამოცდის დღეს და ქულის
-              სანახავად.<br></br>
+              მოსწავლის კოდი და გადმოიწერება სარეგისტრაციო ბარათი PDF სახით
+              რომელიც დაგჭირდებათ გამოცდის დღეს. რეგისტრაციის კოდი დაგჭირდებათ
+              ქულის სანახავად<br></br>
               <b>ონლაინ რეგისტრაცია არ ეხებათ საშაბათო სკოლის მოსწავლეებს!</b>
             </p>
             <form
@@ -296,8 +320,15 @@ const Exam = () => {
                 <FileInput
                   id="file"
                   name="file"
+                  color={fileval ? "failure" : "gray"}
+                  onChange={onFileUpload}
                   required
-                  helperText="აუცილებელია ატვირთოთ სკოლის ცნობა"
+                  helperText={
+                    fileval
+                      ? fileval
+                      : "სკოლის მიერ დამოწმებული ფოტოსურათიანი ცნობა PDF ფორმატში"
+                  }
+                  accept="application/pdf"
                 />
               </div>
               <div>
@@ -305,9 +336,13 @@ const Exam = () => {
                   <Label htmlFor="file2" value="მოსწავლის ფოტო" />
                 </div>
                 <FileInput
+                  color={imgerr ? "failure" : "gray"}
                   id="file2"
                   name="img"
-                  helperText=""
+                  helperText={
+                    imgerr ? imgerr : "მოსწავლის ფოტო 3X2. PNG, JPG, JPEG "
+                  }
+                  onChange={onImgUpload}
                   required
                   accept="image/png, image/jpg, image/jpeg"
                 />
@@ -338,10 +373,10 @@ const Exam = () => {
               </div>
               <div>
                 <div className="mb-2 block">
-                  <Label htmlFor="id3" value="მშობლის ტელ-ნომერი" />
+                  <Label htmlFor="id4" value="მშობლის ტელ-ნომერი" />
                 </div>
                 <TextInput
-                  id="id3"
+                  id="id4"
                   maxLength={9}
                   minLength={9}
                   type="text"
@@ -349,6 +384,15 @@ const Exam = () => {
                   name="phone"
                   required
                 />
+              </div>
+              <div>
+                <div className="mb-2 block">
+                  <Label htmlFor="select" value="სკოლის მეორე უცხოური ენა" />
+                </div>
+                <Select name="language" id="select" required>
+                  <option value="russian">რუსული</option>
+                  <option value="german">გერმანული</option>
+                </Select>
               </div>
               <div>
                 <div className="mb-2 block">
@@ -464,7 +508,9 @@ const Exam = () => {
         </div>
       )} */}
 
-      <div className="flex flex-col items-center">
+      <Testdiv />
+
+      {/* <div className="flex flex-col items-center">
         <h1 className="mb-3 font-alk text-5xl text-center">
           სარეკომენდაციო წერა
         </h1>
@@ -476,7 +522,7 @@ const Exam = () => {
           ველში
         </p>
         <FcGraduationCap size={"8.5rem"} />
-      </div>
+      </div> */}
 
       <h2 className="mt-32 text-center text-3xl font-glaho">
         პროგრამები კლასების მიხედვით
@@ -771,7 +817,8 @@ const Exam = () => {
                           <p className="text-base text-gray-500 dark:text-gray-300">
                             მოსწავლე ამ პირადი ნომრით არის საშაბათო სკოლის
                             სიაში. (მოსწავლე არის უკვე რეგისტრირებული და შეუძლია
-                            გამოცხადდეს გამოცდაზე)
+                            გამოცხადდეს გამოცდაზე თავისი კოდით და იმ ფურცლით
+                            რომელიც სკოლაში გადაეცა)
                           </p>
                         </div>
                       </div>
