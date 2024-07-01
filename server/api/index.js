@@ -22,7 +22,7 @@ const fetch = (...args) =>
 
 const puppeteer = require("puppeteer");
 const saturdayScores = mongoose.model(
-  "satscore",
+  "satscores",
   new Schema({
     name: String,
     surname: String,
@@ -30,7 +30,7 @@ const saturdayScores = mongoose.model(
     class: Number,
     code: String,
   }),
-  "satscore"
+  "satscores"
 );
 
 const MAX_CONCURRENT = 3;
@@ -211,6 +211,8 @@ app.post("/score", async (req, res) => {
     if (!student) {
       res.json({ err: true });
     }
+
+    console.log(student);
 
     res.json({
       name: student.name,
