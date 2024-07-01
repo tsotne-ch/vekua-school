@@ -21,6 +21,17 @@ const fetch = (...args) =>
   import("node-fetch").then(({ default: fetch }) => fetch(...args));
 
 const puppeteer = require("puppeteer");
+const saturdayScores = mongoose.model(
+  "satscore",
+  new Schema({
+    name: String,
+    surname: String,
+    score: Number,
+    class: Number,
+    code: String,
+  }),
+  "satscore"
+);
 
 const MAX_CONCURRENT = 3;
 const INTERVAL = 1000 * 30;
