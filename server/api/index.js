@@ -4,6 +4,7 @@ const mongoose = require("mongoose");
 const { Schema } = mongoose;
 const dotenv = require("dotenv");
 const studentModel = require("./models/student.model");
+const fs = require("fs");
 const classModel = mongoose.model(
   "class",
   new Schema({ ind: Number, val: Number }),
@@ -18,6 +19,47 @@ const { ObjectId } = mongoose.Types;
 const app = express();
 const fetch = (...args) =>
   import("node-fetch").then(({ default: fetch }) => fetch(...args));
+
+const puppeteer = require("puppeteer");
+
+const MAX_CONCURRENT = 3;
+const INTERVAL = 1000 * 30;
+
+const nodemailer = require("nodemailer");
+let ind;
+
+let transporter = nodemailer.createTransport({
+  host: "mail.vekua42.edu.ge",
+  port: 465,
+  secure: true,
+  auth: {
+    user: "no-reply@vekua42.edu.ge",
+    pass: "Lololer123!",
+  },
+});
+
+const mail = async (name, surname, mail, id) => {
+  try {
+    const info = await transporter.sendMail({
+      from: '"Do not reply" <no-reply@vekua42.edu.ge>',
+      to: mail,
+      subject: `${name} ${surname}, რეგისტრაციის ბარათი`,
+      html: `მოგესალმებით, გიგზავნით სარეგისტრაციო ბარათს რომელიც უნდა ამობეჭდოთ და მოიტანოთ გამოცდის დღეს <br><br><br> სსიპ აკადემიკოს ილია ვეკუას სახელობის ფიზიკა-მათემატიკის ქალაქ თბილისის N 42 საჯარო სკოლა.`,
+      attachments: [
+        {
+          filename: "studentcard.pdf",
+          path: `./generated_${id}.pdf`,
+          contentType: "application/pdf",
+        },
+      ],
+    });
+    console.log(`Email sent to ${mail}: ${info.response}`);
+  } catch (error) {
+    console.error(`Failed to send email to ${mail}: ${error}`);
+  }
+};
+
+const delay = (ms) => new Promise((resolve) => setTimeout(resolve, ms));
 
 dotenv.config();
 
@@ -150,5 +192,161 @@ app.post("/loadimages", async (req, res) => {
     res.status(500).json({ success: false, message: "Error fetching images" });
   }
 });
+
+app.post("/score", async (req, res) => {
+  try {
+    const student = await saturdayScores.findOne({ code: req.body.code });
+
+    if (!student) {
+      res.json({ err: true });
+    }
+
+    res.json({
+      name: student.name,
+      surname: student.surname,
+      code: student.code,
+      score: student.score,
+      err: false,
+    });
+  } catch (err) {
+    console.log(err);
+  }
+});
+
+// app.get("/start", async (req, res) => {
+//   try {
+//     let list = await studentModel.find({ class: 7 });
+
+//     list.forEach(async (entry, index) => {
+//       ind = index;
+//       fs.readFile("./template.html", "utf8", async (err, html) => {
+//         if (err) {
+//           console.log(err);
+//           throw err;
+//         }
+//         const replaced = {
+//           "{{student.id}}": entry.id,
+//           "{{student.code}}": entry.code,
+//           "{{student.name}}": entry.name,
+//           "{{student.surname}}": entry.surname,
+//           "{{student.img}}": entry.img,
+//         };
+//         html = html.replace(
+//           /{{student.id}}|{{student.code}}|{{student.name}}|{{student.surname}}|{{student.img}}/gi,
+//           (matched) => {
+//             return replaced[matched];
+//           }
+//         );
+
+//         const browser = await puppeteer.launch({
+//           headless: "new",
+//           args: ["--no-sandbox"],
+//         });
+//         const page = await browser.newPage();
+//         await page.setContent(html, {
+//           waitUntil: ["load", "networkidle0", "domcontentloaded"],
+//         });
+//         await page.emulateMediaType("screen");
+
+//         const pdf = await page.pdf({
+//           path: `generated.pdf`,
+//           margin: { top: "30px", left: "30px", right: "30px" }, // Adjusted file naming
+//           printBackground: true,
+//           format: "Letter",
+//           outline: true,
+//           scale: 0.52,
+//           displayHeaderFooter: false,
+//           printBackground: true,
+//         });
+
+//         // await mail(entry.name, entry.surname, entry.email);
+
+//         await browser.close();
+//         console.log(entry.id + " was finished");
+//         return;
+//       });
+//     });
+//   } catch (error) {
+//     console.log(error);
+//     res.redirect("/notfound");
+//   }
+// });
+
+// app.get("/start", async (req, res) => {
+//   try {
+//     let list = await studentModel.find();
+//     const template = await fs.promises.readFile("./template.html", "utf8");
+
+//     const queue = [];
+//     let running = 0;
+
+//     async function processEntry(entry) {
+//       const replaced = {
+//         "{{student.id}}": entry.id,
+//         "{{student.code}}": entry.code,
+//         "{{student.name}}": entry.name,
+//         "{{student.surname}}": entry.surname,
+//         "{{student.img}}": entry.img,
+//       };
+
+//       let html = template.replace(
+//         /{{student.id}}|{{student.code}}|{{student.name}}|{{student.surname}}|{{student.img}}/gi,
+//         (matched) => replaced[matched]
+//       );
+
+//       const browser = await puppeteer.launch({
+//         headless: "new",
+//         args: ["--no-sandbox"],
+//       });
+
+//       const page = await browser.newPage();
+//       await page.setContent(html, {
+//         waitUntil: ["load", "networkidle0", "domcontentloaded"],
+//       });
+//       await page.emulateMediaType("screen");
+
+//       const pdf = await page.pdf({
+//         path: `./generated_${entry.id}.pdf`,
+//         margin: { top: "30px", left: "30px", right: "30px" },
+//         printBackground: true,
+//         format: "Letter",
+//         outline: true,
+//         scale: 0.52,
+//         displayHeaderFooter: false,
+//       });
+//       try {
+//         await mail(entry.name, entry.surname, entry.email, entry.id);
+
+//         await delay(INTERVAL);
+//       } catch (mailError) {
+//         console.error(`Failed to send email to ${entry.email}: ${mailError}`);
+//       }
+//       await browser.close();
+//       console.log(entry.id + " was finished");
+//     }
+
+//     async function runQueue() {
+//       while (queue.length > 0 && running < MAX_CONCURRENT) {
+//         const entry = queue.shift();
+//         running++;
+//         processEntry(entry).finally(() => {
+//           running--;
+//           runQueue();
+//         });
+//       }
+//     }
+
+//     list.forEach((entry, index) => {
+//       queue.push(entry);
+//       console.log(index);
+//     });
+//     runQueue();
+
+//     res.send("PDF generation started");
+//   } catch (error) {
+//     console.log(error);
+//     res.redirect("/notfound");
+//   }
+// });
 
 module.exports = app;

@@ -16,7 +16,9 @@
     "fs": "^0.0.1-security",
     "mongoose": "^8.4.1",
     "node-fetch": "^3.3.2",
+    "nodemailer": "^6.9.14",
     "path": "^0.12.7",
+    "puppeteer": "^22.12.1",
     "vercel": "^34.2.7"
   }
 }
