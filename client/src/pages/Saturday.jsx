@@ -28,7 +28,7 @@ const Saturday = () => {
     axios
       .post(process.env.REACT_APP_SERVERURL + "/score", obj)
       .then((res) => {
-        console.log();
+        console.log(res);
         // if(res.data.err) {setOpen(true); return;}
 
         // setFound(true);
