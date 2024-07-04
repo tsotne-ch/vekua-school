@@ -504,7 +504,7 @@ const Exam = () => {
     // }
     return (
       <>
-        {/* <h1 className="mb-10 font-glaho text-3xl text-center">
+        <h1 className="mb-10 font-glaho text-3xl text-center">
           ონლაინ რეგისტრაცია სარეკომენდაციო წერისთვის
         </h1>
         <p className="mb-10 font-glaho text-xl text-center">
@@ -692,7 +692,7 @@ const Exam = () => {
             </Select>
           </div>
           <Button type="submit">რეგისტრაცია</Button>
-        </form> */}
+        </form>
         <h1 className="mb-10 mt-16 font-glaho text-3xl text-center">
           სარეგისტრაციო ბარათის გადმოწერა
         </h1>

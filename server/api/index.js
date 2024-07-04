@@ -29,12 +29,14 @@ const saturdayScores = mongoose.model(
     score: Number,
     class: Number,
     code: String,
+    math: String,
+    physics: String,
   }),
   "satscores"
 );
 
-const MAX_CONCURRENT = 3;
-const INTERVAL = 1000 * 30;
+const MAX_CONCURRENT = 1;
+const INTERVAL = 1000 * 24;
 
 const nodemailer = require("nodemailer");
 let ind;
@@ -214,13 +216,27 @@ app.post("/score", async (req, res) => {
 
     console.log(student);
 
-    res.json({
-      name: student.name,
-      surname: student.surname,
-      code: student.code,
-      score: student.score,
-      err: false,
-    });
+    if (student.class === 7) {
+      res.json({
+        name: student.name,
+        surname: student.surname,
+        code: student.code,
+        class: student.class,
+        score: student.score,
+        err: false,
+      });
+    } else {
+      console.log(student);
+      res.json({
+        name: student.name,
+        surname: student.surname,
+        code: student.code,
+        class: student.class,
+        math: student.math,
+        physics: student.physics,
+        err: false,
+      });
+    }
   } catch (err) {
     console.log(err);
   }
@@ -349,7 +365,7 @@ app.post("/score", async (req, res) => {
 //       }
 //     }
 
-//     list.forEach((entry, index) => {
+//     list.slice(431).forEach((entry, index) => {
 //       queue.push(entry);
 //       console.log(index);
 //     });
