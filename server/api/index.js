@@ -95,58 +95,58 @@ app.get("/", (req, res) => {
   res.send("Server up and running!");
 });
 
-app.post("/addstudent", async (req, res) => {
-  try {
-    if (!req.body) throw err;
+// app.post("/addstudent", async (req, res) => {
+//   try {
+//     if (!req.body) throw err;
 
-    console.log(req.body);
+//     console.log(req.body);
 
-    let found = await saturdayModel.findOne({ id: req.body.id });
+//     let found = await saturdayModel.findOne({ id: req.body.id });
 
-    if (found) {
-      res.status(401).send({
-        msg: "student already in saturday school list",
-        code: "42000",
-      });
-      return;
-    }
+//     if (found) {
+//       res.status(401).send({
+//         msg: "student already in saturday school list",
+//         code: "42000",
+//       });
+//       return;
+//     }
 
-    let classval = await classModel.findOneAndUpdate(
-      { val: +req.body.class },
-      {
-        $inc: { ind: 1 },
-      }
-    );
+//     let classval = await classModel.findOneAndUpdate(
+//       { val: +req.body.class },
+//       {
+//         $inc: { ind: 1 },
+//       }
+//     );
 
-    var str = "" + classval.ind;
-    var pad = "000";
-    var ans = pad.substring(0, pad.length - str.length) + str;
-    let final = req.body.class + "-" + ans;
+//     var str = "" + classval.ind;
+//     var pad = "000";
+//     var ans = pad.substring(0, pad.length - str.length) + str;
+//     let final = req.body.class + "-" + ans;
 
-    let student = new studentModel({
-      name: req.body.name,
-      surname: req.body.surname,
-      pname: req.body.pname,
-      psurname: req.body.psurname,
-      img: req.body.img,
-      file: req.body.file,
-      oldschool: req.body.oldschool,
-      id: req.body.id,
-      code: final,
-      class: req.body.class,
-      phone: req.body.phone,
-      email: req.body.email,
-      language: req.body.language,
-    });
+//     let student = new studentModel({
+//       name: req.body.name,
+//       surname: req.body.surname,
+//       pname: req.body.pname,
+//       psurname: req.body.psurname,
+//       img: req.body.img,
+//       file: req.body.file,
+//       oldschool: req.body.oldschool,
+//       id: req.body.id,
+//       code: final,
+//       class: req.body.class,
+//       phone: req.body.phone,
+//       email: req.body.email,
+//       language: req.body.language,
+//     });
 
-    await student.save();
+//     await student.save();
 
-    res.send(student);
-  } catch (err) {
-    console.log(err);
-    res.status(500).send(err);
-  }
-});
+//     res.send(student);
+//   } catch (err) {
+//     console.log(err);
+//     res.status(500).send(err);
+//   }
+// });
 
 app.get("/findstudent/:id", async (req, res) => {
   try {
