@@ -765,7 +765,7 @@ const Exam = () => {
         </p>
       </div>
 
-      <Testdiv />
+      {/* <Testdiv /> */}
 
       <h2 className="mt-32 text-center text-3xl font-glaho">
         პროგრამები კლასების მიხედვით
