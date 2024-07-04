@@ -12,6 +12,7 @@ import {
 } from "@headlessui/react";
 import { ExclamationTriangleIcon } from "@heroicons/react/24/outline";
 import axios from "axios";
+import Swal from "sweetalert2";
 
 const Saturday = () => {
   let [open, setOpen] = useState(false);
@@ -20,6 +21,14 @@ const Saturday = () => {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
+    Swal.fire({
+      title: "<p class='font-glaho'>იტვირთება</p>",
+      html: "<p class='font-glaho'>გთხოვთ დაიცადოთ, მოსწავლე რეგისტრირდება</p>",
+      allowOutsideClick: false,
+      didOpen: () => {
+        Swal.showLoading();
+      },
+    });
     console.log("Req");
     const obj = {
       code: e.target.code.value,
@@ -28,14 +37,20 @@ const Saturday = () => {
     axios
       .post(process.env.REACT_APP_SERVERURL + "/score", obj)
       .then((res) => {
-        console.log(res);
-        // if(res.data.err) {setOpen(true); return;}
-
-        // setFound(true);
-        // setData(res.data)
+        Swal.close();
+        if (res.data.err) {
+          setOpen(true);
+          setFound(false);
+          return;
+        }
+        console.log(res.data);
+        setFound(true);
+        setData(res.data);
       })
       .catch((err) => {
+        setFound(false);
         console.log(err);
+        Swal.close();
         setOpen(true);
       });
   };
@@ -47,7 +62,7 @@ const Saturday = () => {
       </Helmet>
       <Banner heading="საშაბათო სკოლა" />
       <div className="dark:bg-slate-900">
-        <div className="dark:text-white py-10 container font-glaho">
+        <div className="dark:text-white py-20 container font-glaho">
           {/* <p>
             <div>
               <p>
@@ -598,8 +613,8 @@ const Saturday = () => {
           </p> */}
           <>
             <h1 className="mt-10 mb-10 font-glaho text-3xl text-center">
-              28 ივნისს ჩატარებული საშაბათო სკოლის შემაჯამებელი წერის ქულის
-              შემოწმება
+              28 ივნისს, 1 და 2 ივლისს ჩატარებული საშაბათო სკოლის შემაჯამებელი
+              წერის ქულის შემოწმება
             </h1>
             <form
               onSubmit={handleSubmit}
@@ -631,6 +646,42 @@ const Saturday = () => {
                 მოსწავლის ქულის ნახვა
               </Button>
             </form>
+            {found ? (
+              <>
+                {/* <div className="text-center">
+                  <h1 className="text-2xl">
+                    {data.name} {data.surname}
+                  </h1>
+                  <h2 className="text-4xl mt-5">{data.score} ქულა</h2>
+                </div> */}
+                {data.class == 7 ? (
+                  <div className="text-center">
+                    <h1 className="text-2xl">
+                      {data.name} {data.surname}
+                    </h1>
+                    <h2 className="text-4xl mt-5">{data.score} ქულა</h2>
+                  </div>
+                ) : (
+                  <div className="text-center">
+                    <h1 className="text-2xl">
+                      {data.name} {data.surname}
+                    </h1>
+                    <h2 className="text-4xl mt-5">
+                      მათემატიკა:{" "}
+                      {data.math == "x" ? "შეფასება არ აქვს" : "" + data.math}
+                    </h2>
+                    <h2 className="text-4xl mt-5">
+                      ფიზიკა:{" "}
+                      {data.physics == "x"
+                        ? "შეფასება არ აქვს"
+                        : "" + data.physics}
+                    </h2>
+                  </div>
+                )}
+              </>
+            ) : (
+              <></>
+            )}
           </>
         </div>
       </div>
