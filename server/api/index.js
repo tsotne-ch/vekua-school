@@ -15,6 +15,19 @@ const saturdayModel = mongoose.model(
   new Schema({ id: String, name: String, surname: String }),
   "saturday"
 );
+const examModel = mongoose.model(
+  "exams",
+  new Schema({
+    name: String,
+    surname: String,
+    points: String,
+    class: Number,
+    code: String,
+    math: String,
+    physics: String,
+  }),
+  "exams"
+);
 const { ObjectId } = mongoose.Types;
 const app = express();
 const fetch = (...args) =>
@@ -223,6 +236,43 @@ app.post("/score", async (req, res) => {
         code: student.code,
         class: student.class,
         score: student.score,
+        err: false,
+      });
+    } else {
+      console.log(student);
+      res.json({
+        name: student.name,
+        surname: student.surname,
+        code: student.code,
+        class: student.class,
+        math: student.math,
+        physics: student.physics,
+        err: false,
+      });
+    }
+  } catch (err) {
+    console.log(err);
+  }
+});
+
+app.post("/exam", async (req, res) => {
+  try {
+    const student = await examModel.findOne({ code: req.body.code });
+
+    if (!student) {
+      res.json({ err: true });
+    }
+
+    console.log(student.points);
+
+    if (student.code[0] == "7") {
+      console.log("7 grader");
+      res.json({
+        name: student.name,
+        surname: student.surname,
+        code: student.code,
+        class: student.class,
+        points: student.points,
         err: false,
       });
     } else {
