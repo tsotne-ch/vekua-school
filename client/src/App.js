@@ -19,8 +19,10 @@ import Post from "./pages/Post";
 import Projects from "./pages/Projects";
 import Project from "./pages/Project";
 import Achievments from "./pages/Achievments";
+import Login from "./pages/Login";
 
 function App() {
+  let urls = ["/login"];
   return (
     <Router>
       <div className="App">
@@ -40,6 +42,7 @@ function App() {
             <Route path="/projects" element={<Projects />} />
             <Route path="/achievments" element={<Achievments />} />
             <Route path="/projects/:id" element={<Project />} />
+            <Route path="/login" element={<Login />} />
             {/* <Route path="/student/:code" element={<Students />} /> */}
             <Route
               path="*"

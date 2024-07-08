@@ -4,6 +4,7 @@
   "homepage": "https://beta.vekua42.edu.ge",
   "private": true,
   "dependencies": {
+    "@ckeditor/ckeditor5-react": "^8.0.0",
     "@emotion/react": "^11.11.3",
     "@emotion/styled": "^11.11.0",
     "@headlessui/react": "^2.0.4",
@@ -15,6 +16,7 @@
     "@testing-library/react": "^13.4.0",
     "@testing-library/user-event": "^13.5.0",
     "axios": "^1.7.2",
+    "ckeditor5": "^42.0.0",
     "dotenv": "^16.4.5",
     "file-saver": "^2.0.5",
     "firebase": "^10.12.2",
