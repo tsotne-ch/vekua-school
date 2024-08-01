@@ -1,4 +1,5 @@
 import Logo from "./images/vekua_simplified.png";
+import { Link } from "react-router-dom";
 
 const Line = ({ width }) => {
   return <div className={`w-${width} p-1 bg-sky-600 mt-3 rounded-md`}></div>;
@@ -93,35 +94,41 @@ const Footer = () => {
             </div>
             <div className="flex-row flex justify-between mt-5">
               <div className="links flex-col flex gap-3">
-                <a href="/" className="font-glaho dark:text-[#ffffffdb]">
+                <Link to="/" className="font-glaho dark:text-[#ffffffdb]">
                   მთავარი
-                </a>
-                <a href="/history" className="font-glaho dark:text-[#ffffffdb]">
+                </Link>
+                <Link
+                  to="/history"
+                  className="font-glaho dark:text-[#ffffffdb]"
+                >
                   ჩვენ შესახებ
-                </a>
-                <a href="/news" className="font-glaho dark:text-[#ffffffdb]">
+                </Link>
+                <Link to="/news" className="font-glaho dark:text-[#ffffffdb]">
                   სიახლეები
-                </a>
-                <a
-                  href="/saturday-school"
+                </Link>
+                <Link
+                  to="/saturday-school"
                   className="font-glaho dark:text-[#ffffffdb]"
                 >
                   საშაბათო სკოლა
-                </a>
+                </Link>
               </div>
               <div className="links flex-col flex gap-3">
-                <a href="/exams" className="font-glaho dark:text-[#ffffffdb]">
+                <Link to="/exams" className="font-glaho dark:text-[#ffffffdb]">
                   სარეკომენდაციო წერა
-                </a>
-                <a href="/contact" className="font-glaho dark:text-[#ffffffdb]">
+                </Link>
+                <Link
+                  to="/contact"
+                  className="font-glaho dark:text-[#ffffffdb]"
+                >
                   კონტაქტი
-                </a>
-                <a href="/blogs" className="font-glaho dark:text-[#ffffffdb]">
+                </Link>
+                <Link to="/blogs" className="font-glaho dark:text-[#ffffffdb]">
                   ბლოგი
-                </a>
-                <a href="/tv" className="font-glaho dark:text-[#ffffffdb]">
+                </Link>
+                <Link to="/tv" className="font-glaho dark:text-[#ffffffdb]">
                   ვეკუა TV
-                </a>
+                </Link>
               </div>
             </div>
           </div>

@@ -18,6 +18,7 @@ import { Pagination } from "flowbite-react";
 import { useState } from "react";
 import { Helmet } from "react-helmet";
 import { onAuthStateChanged } from "firebase/auth";
+import { Link as LinkRoute } from "react-router-dom";
 
 import { CKEditor } from "@ckeditor/ckeditor5-react";
 
@@ -66,6 +67,14 @@ import {
 } from "ckeditor5";
 
 import "ckeditor5/ckeditor5.css";
+
+const MotionComponent = ({ as, children, ...props }) => {
+  const ChildrenComponent = motion(as, {
+    forwardMotionProps: true,
+  });
+
+  return <ChildrenComponent {...props}>{children}</ChildrenComponent>;
+};
 
 const News = () => {
   const [currentPage, setCurrentPage] = useState(1);
@@ -336,6 +345,8 @@ const News = () => {
         number: code,
         status: "enabled",
       });
+
+      getPosts();
     } else {
       console.log("unauthorized");
     }
@@ -382,7 +393,10 @@ const News = () => {
                 </label>
               </div>
               <div className="">
-                <div className="" ref={editorContainerRef}>
+                <div
+                  className="rounded-lg overflow-hidden"
+                  ref={editorContainerRef}
+                >
                   <div className=" ">
                     <div ref={editorRef}>
                       {isLayoutReady && (
@@ -413,17 +427,10 @@ const News = () => {
           <div className="lg:basis-3/4 p-4">
             <div className="data">
               {feed.map((post, index) => (
-                <motion.a
+                <LinkRoute
                   key={index}
-                  initial={{ opacity: 0, scale: 0.5 }}
-                  animate={{ opacity: 1, scale: 1 }}
-                  transition={{
-                    duration: 0.2,
-                    delay: 0.1 * (index - 1),
-                    ease: [0, 0.71, 0.9, 1.01],
-                  }}
-                  href={`/news/${post.id}`}
-                  className="overflow-ellipsis overflow-hidden relative mt-2 p-3 md:h-48 w-full flex flex-col md:flex-row rounded-md shadow-md bg-white hover:bg-gray-50 transition-all ease-in-out duration-100 dark:bg-slate-800 dark:text-white dark:hover:bg-slate-700"
+                  to={`/news/${post.id}`}
+                  className=" hover:scale-105 overflow-ellipsis overflow-hidden relative mt-2 p-3 md:h-48 w-full flex flex-col md:flex-row rounded-md shadow-md bg-white hover:bg-gray-50 transition-all ease-in-out duration-300 dark:bg-slate-800 dark:text-white dark:hover:bg-slate-700"
                 >
                   <div
                     style={{
@@ -446,7 +453,7 @@ const News = () => {
                       {post.info.date}
                     </p>
                   </div>
-                </motion.a>
+                </LinkRoute>
               ))}
             </div>
             <div className="flex mt-3 overflow-x-auto justify-center">
