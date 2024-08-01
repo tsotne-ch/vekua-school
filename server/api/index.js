@@ -55,7 +55,7 @@ app.use(
     extended: true,
   })
 );
-app.listen(8080);
+app.listen(3000);
 
 const uri = `mongodb+srv://${process.env.key}@vekuacluster.suzebxd.mongodb.net/?retryWrites=true&w=majority&appName=vekuacluster`;
 
