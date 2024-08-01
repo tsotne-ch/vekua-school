@@ -16,6 +16,7 @@ import {
 } from "firebase/firestore";
 import parse from "html-react-parser";
 import { Helmet } from "react-helmet";
+import { Link } from "react-router-dom";
 
 const Post = () => {
   const id = useParams();
@@ -68,8 +69,8 @@ const Post = () => {
                   იხილეთ მეტი
                 </h1>
                 <div className="container gap-3 flex flex-col">
-                  <a
-                    href="/history"
+                  <Link
+                    to="/history"
                     className="hover:scale-110 transition-all duration-300 ease-in-out p-3 flex flex-col items-center rounded-xl justify-center bg-white dark:bg-slate-800  shadow-xl"
                   >
                     <FaSchool
@@ -79,9 +80,9 @@ const Post = () => {
                     <h3 className="font-glaho text-xl mt-3 dark:text-white">
                       ისტორია და მისია
                     </h3>
-                  </a>
-                  <a
-                    href="/exams"
+                  </Link>
+                  <Link
+                    to="/exams"
                     className="hover:scale-110 transition-all duration-300 ease-in-out p-3 flex flex-col items-center rounded-xl justify-center bg-white dark:bg-slate-800  shadow-xl"
                   >
                     <PiStudentFill
@@ -91,9 +92,9 @@ const Post = () => {
                     <h3 className="font-glaho text-xl mt-3 dark:text-white">
                       სარეკომენდაციო წერა
                     </h3>
-                  </a>
-                  <a
-                    href="/achievments"
+                  </Link>
+                  <Link
+                    to="/achievments"
                     className="hover:scale-110 transition-all duration-300 ease-in-out p-3 flex flex-col items-center rounded-xl justify-center bg-white dark:bg-slate-800 shadow-xl"
                   >
                     <HiMiniTrophy
@@ -103,9 +104,9 @@ const Post = () => {
                     <h3 className="font-glaho text-xl mt-3 dark:text-white">
                       მიღწევები
                     </h3>
-                  </a>
-                  <a
-                    href="/saturday-school"
+                  </Link>
+                  <Link
+                    to="/saturday-school"
                     className="hover:scale-110 transition-all duration-300 ease-in-out p-3 flex flex-col items-center rounded-xl justify-center bg-white dark:bg-slate-800  shadow-xl"
                   >
                     <TbMathFunction
@@ -115,7 +116,7 @@ const Post = () => {
                     <h3 className="font-glaho text-xl mt-3 dark:text-white">
                       საშაბათო სკოლა
                     </h3>
-                  </a>
+                  </Link>
                 </div>
               </div>
             </div>

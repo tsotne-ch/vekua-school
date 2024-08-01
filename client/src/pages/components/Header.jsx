@@ -5,6 +5,7 @@ import { Bars3Icon, XMarkIcon } from "@heroicons/react/24/outline";
 import { ChevronDownIcon } from "@heroicons/react/20/solid";
 import { styled } from "@mui/material/styles";
 import Switch from "@mui/material/Switch";
+import { Link } from "react-router-dom";
 
 const IOSSwitch = styled((props) => (
   <Switch focusVisibleClassName=".Mui-focusVisible" disableRipple {...props} />
@@ -133,9 +134,9 @@ export default function Example() {
           aria-label="Global"
         >
           <div className="flex flex-1 h-[4.5rem]">
-            <a href="/" className="p-1 h-full bg-white rounded-full">
+            <Link to="/" className="p-1 h-full bg-white rounded-full">
               <img className=" h-full" src={Logo} alt="" />
-            </a>
+            </Link>
           </div>
           <div className="flex lg:hidden">
             <button
@@ -148,12 +149,12 @@ export default function Example() {
             </button>
           </div>
           <Popover.Group className="w-[86%] justify-between hidden lg:flex lg:gap-x-10">
-            <a
-              href="/"
+            <Link
+              to="/"
               className="text-sm  leading-6 text-gray-900 dark:text-white"
             >
               მთავარი
-            </a>
+            </Link>
             <Popover className="relative">
               <Popover.Button className="flex items-center gap-x-1 text-sm  leading-6 text-gray-900 dark:text-white">
                 ჩვენ შესახებ
@@ -180,13 +181,13 @@ export default function Example() {
                         className="group relative flex items-center gap-x-6 rounded-lg p-4 text-sm leading-6 hover:bg-gray-50 hover:dark:bg-slate-700"
                       >
                         <div className="flex-auto">
-                          <a
-                            href={item.href}
+                          <Link
+                            to={item.href}
                             className="block  text-gray-900 dark:text-white"
                           >
                             {item.name}
                             <span className="absolute inset-0" />
-                          </a>
+                          </Link>
                         </div>
                       </div>
                     ))}
@@ -195,18 +196,18 @@ export default function Example() {
               </Transition>
             </Popover>
 
-            <a
-              href="/news"
+            <Link
+              to="/news"
               className="text-sm  leading-6 text-gray-900 dark:text-white"
             >
               სიახლეები
-            </a>
-            <a
-              href="/projects"
+            </Link>
+            <Link
+              to="/projects"
               className="text-sm  leading-6 text-gray-900 dark:text-white"
             >
               პროგრამები/პროექტები
-            </a>
+            </Link>
             <Popover className="relative">
               <Popover.Button className="flex items-center gap-x-1 text-sm  leading-6 text-gray-900 dark:text-white">
                 ბლოგები
@@ -233,13 +234,13 @@ export default function Example() {
                         className="group relative flex items-center gap-x-6 rounded-lg p-4 text-sm leading-6 hover:bg-gray-50 hover:dark:bg-slate-700"
                       >
                         <div className="flex-auto">
-                          <a
-                            href={item.href}
+                          <Link
+                            to={item.href}
                             className="block  text-gray-900 dark:text-white"
                           >
                             {item.name}
                             <span className="absolute inset-0" />
-                          </a>
+                          </Link>
                         </div>
                       </div>
                     ))}
@@ -247,18 +248,18 @@ export default function Example() {
                 </Popover.Panel>
               </Transition>
             </Popover>
-            <a
-              href="/contact"
+            <Link
+              to="/contact"
               className="text-sm  leading-6 text-gray-900 dark:text-white"
             >
               კონტაქტი
-            </a>
-            <a
-              href="https://www.youtube.com/@TV-ug6oo"
+            </Link>
+            <Link
+              to="https://www.youtube.com/@TV-ug6oo"
               className="text-sm  leading-6 text-gray-900 dark:text-white"
             >
               ვეკუა TV
-            </a>
+            </Link>
             <IOSSwitch onChange={() => changeTheme()} checked={checked} />
           </Popover.Group>
         </nav>
@@ -271,10 +272,10 @@ export default function Example() {
           <div className="fixed inset-0 z-10" />
           <Dialog.Panel className="fixed inset-y-0 right-0 z-20 w-full overflow-y-auto bg-white dark:bg-slate-800 px-6 py-6 sm:max-w-sm sm:ring-1 sm:ring-gray-900/10">
             <div className="flex items-center justify-between">
-              <a href="/" className="-m-1.5 p-1.5">
+              <Link to="/" className="-m-1.5 p-1.5">
                 <span className="sr-only">ვეკუა 42</span>
                 <img className="h-8 w-auto" src={Logo} alt="" />
-              </a>
+              </Link>
               <button
                 type="button"
                 className="-m-2.5 rounded-md p-2.5 text-gray-700"
@@ -287,54 +288,54 @@ export default function Example() {
             <div className="mt-6 flow-root">
               <div className="-my-6 divide-y divide-gray-500/10">
                 <div className="space-y-2 py-6">
-                  <a
-                    href="/"
+                  <Link
+                    to="/"
                     className="-mx-3 block rounded-lg px-3 py-2 text-base  leading-7 text-gray-900 dark:text-white hover:bg-gray-50"
                   >
                     მთავარი
-                  </a>
+                  </Link>
                   {products.map((item) => (
-                    <a
-                      href={item.href}
+                    <Link
+                      to={item.href}
                       key={item.name}
                       className="-mx-3 block rounded-lg px-3 py-2 text-base  leading-7 text-gray-900 dark:text-white hover:bg-gray-50"
                     >
                       {item.name}
-                    </a>
+                    </Link>
                   ))}
-                  <a
-                    href="/news"
+                  <Link
+                    to="/news"
                     className="-mx-3 block rounded-lg px-3 py-2 text-base  leading-7 text-gray-900  hover:bg-gray-50 dark:text-white"
                   >
                     სიახლეები
-                  </a>
-                  <a
-                    href="/projects"
+                  </Link>
+                  <Link
+                    to="/projects"
                     className="-mx-3 block rounded-lg px-3 py-2 text-base  leading-7 text-gray-900  hover:bg-gray-50 dark:text-white"
                   >
                     პროგრამები/პროექტები
-                  </a>
-                  <a
-                    href="/contact"
+                  </Link>
+                  <Link
+                    to="/contact"
                     className="-mx-3 block rounded-lg px-3 py-2 text-base  leading-7 text-gray-900 hover:bg-gray-50 dark:text-white"
                   >
                     კონტაქტი
-                  </a>
+                  </Link>
                   {teachers.map((item) => (
-                    <a
-                      href={item.href}
+                    <Link
+                      to={item.href}
                       key={item.name}
                       className="-mx-3 block rounded-lg px-3 py-2 text-base  leading-7 text-gray-900 dark:text-white hover:bg-gray-50"
                     >
                       {item.name}
-                    </a>
+                    </Link>
                   ))}
-                  <a
-                    href="https://www.youtube.com/@TV-ug6oo"
+                  <Link
+                    to="https://www.youtube.com/@TV-ug6oo"
                     className="-mx-3 block rounded-lg px-3 py-2 text-base  leading-7 text-gray-900 dark:text-white hover:bg-gray-50"
                   >
                     ვეკუა TV
-                  </a>
+                  </Link>
                   <p className="!mt-8 dark:text-white">ბნელი რეჟიმი</p>
                   <IOSSwitch onChange={() => changeTheme()} checked={checked} />
                 </div>
