@@ -1,11 +1,9 @@
 const Banner = ({ heading }) => {
-  const imageUrl = require("./images/last_bell_2022.jpeg");
-
   return (
     <section
       className={`py-36 bg-center bg-fixed bg-cover`}
       style={{
-        backgroundImage: `url(${imageUrl})`,
+        backgroundImage: `url(/images/last_bell_2022.jpeg)`,
         backgroundColor: "#00000073",
         backgroundBlendMode: "overlay",
       }}
