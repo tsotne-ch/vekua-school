@@ -35,7 +35,7 @@ const Saturday = () => {
     };
 
     axios
-      .post(process.env.REACT_APP_SERVERURL + "/score", obj)
+      .post(import.meta.env.VITE_REACT_APP_SERVERURL + "/score", obj)
       .then((res) => {
         Swal.close();
         if (res.data.err) {

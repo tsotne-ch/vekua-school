@@ -25,6 +25,8 @@ import { firestore, storage, auth } from "../firebase/firebase.config";
 import { Helmet } from "react-helmet";
 import Swal from "sweetalert2";
 
+let process = import.meta;
+
 const Exam = () => {
   let [open, setOpen] = useState(false);
   let [exam, setExam] = useState(true);
@@ -84,7 +86,7 @@ const Exam = () => {
   //   });
 
   //   axios
-  //     .get(process.env.REACT_APP_SERVERURL + "/check/" + e.target.id.value)
+  //     .get(import.meta.env.VITE_REACT_APP_SERVERURL + "/check/" + e.target.id.value)
   //     .then(async (resp) => {
   //       const storageRef = storage.ref();
   //       const fileRef = storageRef.child(`FILE_${e.target.id.value}`);
@@ -99,13 +101,13 @@ const Exam = () => {
   //       obj.img = imgUrl;
   //       obj.file = fileUrl;
   //       axios
-  //         .post(process.env.REACT_APP_SERVERURL + "/addstudent", obj)
+  //         .post(import.meta.env.VITE_REACT_APP_SERVERURL + "/addstudent", obj)
   //         .then((res) => {
   //           Swal.close();
   //           setData(res.data);
   //           setOpenS(true);
   //           axios
-  //             .post(process.env.REACT_APP_SERVERURL + "/loadimages/", {
+  //             .post(import.meta.env.VITE_REACT_APP_SERVERURL + "/loadimages/", {
   //               image: res.data.img,
   //             })
   //             .then((resp) => {
@@ -188,14 +190,14 @@ const Exam = () => {
   //   };
 
   //   axios
-  //     .get(process.env.REACT_APP_SERVERURL + "/findstudent/" + obj.query)
+  //     .get(import.meta.env.VITE_REACT_APP_SERVERURL + "/findstudent/" + obj.query)
   //     .then((res) => {
   //       console.log(res);
   //       setStudent(res.data);
   //       setFound(true);
   //       setPDF(true);
   //       axios
-  //         .post(process.env.REACT_APP_SERVERURL + "/loadimages/", {
+  //         .post(import.meta.env.VITE_REACT_APP_SERVERURL + "/loadimages/", {
   //           image: res.data.img,
   //         })
   //         .then((resp) => {
@@ -761,7 +763,7 @@ const Exam = () => {
     };
 
     axios
-      .post(process.env.REACT_APP_SERVERURL + "/exam", obj)
+      .post(import.meta.env.VITE_REACT_APP_SERVERURL + "/exam", obj)
       .then((res) => {
         Swal.close();
         if (res.data.err) {

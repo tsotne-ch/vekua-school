@@ -144,8 +144,8 @@ const Home = () => {
             "lg:basis-3/4 p-4 transition-all duration-700" +
             `${
               inView
-                ? " translate-x-0 opacity-100"
-                : " translate-x-48 opacity-0"
+                ? " translate-y-0 opacity-100"
+                : " translate-y-48 opacity-0"
             }`
           }
         >
