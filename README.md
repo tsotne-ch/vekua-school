@@ -1,8 +1,10 @@
 # N42 Ilia Vekua Public school webpage (Official)
 ### https://vekua42.edu.ge
 
-This project was bootstrapped with create-react-app
-Read more at [Create React App](https://create-react-app.dev/)
+## Vite + React
+
+This project was bootstrapped with Vite
+Read more at [vitejs.dev](https://vitejs.dev/)
 
 ![Vekua page pic](https://github.com/user-attachments/assets/27b6f4ba-6b65-49aa-89fb-fa778c7a4486)
 
@@ -44,7 +46,7 @@ In order to run the webpage in development mode, run these commands
 
 In the client directory
 ```
-  npm start
+  npm run dev
 ```
 
 In order to build the application for production
