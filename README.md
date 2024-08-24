@@ -12,7 +12,7 @@ Made with MongoDB, ExpressJS, React, NodeJS and Firebase
 
 ## Installation
 
-First make sure to rename .env.example to .env in both Client and Server directories.
+First make sure to rename .env.example to .env in both main and firebase functions directories.
 
 **If you are planning to test/startup the node server make sure to enter your own MongoDB URI Auth Information in .env file (Username and password)**
 
@@ -21,44 +21,24 @@ First make sure to rename .env.example to .env in both Client and Server directo
 mongodb+srv://USERNAME:PASSWORD@appcool.niceapp.mongodb.net/?retryWrites=true&w=majority&appName=myApp
 ```
 
-**./server/.env**
+**./your_firebase_cloud_function/.env**
 ```
 KEY="USERNAME:PASSWORD"
 ```
 
 ### Installing dependencies
 
-You need to install all npm packages with both projects
+You need to install all npm packages
 ```
-  cd client
-  npm install
-```
-```
-  cd server
   npm install
 ```
 
-## Running the app
-
-### Client app
-
-In order to run the webpage in development mode, run these commands
-
-In the client directory
+To run the app run
 ```
   npm run dev
 ```
 
-In order to build the application for production
+To build the app for production
 ```
   npm run build
 ```
-
-### Server
-
-```
-  cd server
-  node api/index
-```
-
-The server will be running on http://localhost:3000 unless you change the port.
