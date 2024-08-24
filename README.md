@@ -18,7 +18,7 @@ First make sure to rename .env.example to .env in both Client and Server directo
 
 **MongoDB URI Example**
 ```
-mongodb+srv://USERNAME:PASSWORD@vekuacluster.suzebxd.mongodb.net/?retryWrites=true&w=majority&appName=vekuacluster
+mongodb+srv://USERNAME:PASSWORD@appcool.niceapp.mongodb.net/?retryWrites=true&w=majority&appName=myApp
 ```
 
 **./server/.env**
