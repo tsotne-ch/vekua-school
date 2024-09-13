@@ -14,10 +14,40 @@ import axios from "axios";
 import Swal from "sweetalert2";
 import { Accordion } from "flowbite-react";
 import { Button, Checkbox, Label, TextInput, Select } from "flowbite-react";
+import { display } from "@mui/system";
 
 const SaturdaySchoolRegistrationPage = () => {
   const [grade, setGrade] = useState(3);
-
+  const [techer, setTecher] = useState("გიორგი კაკაბაძე");
+  const TeacherSelect = () => {
+    if (techer === "გიორგი კაკაბაძე") {
+      return (
+        <Select id="countries" required defaultValue={""}>
+          <option>
+            გიორგი კაკაბაძე - 11:00 (11 ადგილი) - ჯგუფის ასარჩევად გთხოვთ
+            აირჩიოთ შესაბამისი მასწავლებელი
+          </option>
+          <option>
+            გიორგი კაკაბაძე - 12:30 (15 ადგილი) - ჯგუფის ასარჩევად გთხოვთ
+            აირჩიოთ შესაბამისი მასწავლებელი
+          </option>
+        </Select>
+      );
+    } else if (techer == "თემურ გაჩეჩილაძე") {
+      return (
+        <Select id="countries" required defaultValue={""}>
+          <option>
+            თემურ გაჩეჩილაძე - 11:00 (2 ადგილი) - ჯგუფის ასარჩევად გთხოვთ
+            აირჩიოთ შესაბამისი მასწავლებელი
+          </option>
+          <option>
+            თემურ გაჩეჩილაძე - 12:30 (2 ადგილი) - ჯგუფის ასარჩევად გთხოვთ
+            აირჩიოთ შესაბამისი მასწავლებელი
+          </option>
+        </Select>
+      );
+    }
+  };
   return (
     <>
       <Helmet>
@@ -171,8 +201,8 @@ const SaturdaySchoolRegistrationPage = () => {
           </Accordion>
 
           <vekuaregistrateform className="block mt-10">
-            <form className="flex max-w-3xl m-auto flex-col gap-4">
-              <h1 className="text-center text-2xl mb-4">
+            <form className="flex max-w-4xl m-auto flex-col gap-4">
+              <h1 className="text-center text-4xl mb-4">
                 საშაბათო სკოლაში მოსწავლის რეგისტრაცია
               </h1>
               {/* <div>
@@ -185,15 +215,17 @@ const SaturdaySchoolRegistrationPage = () => {
                   ))}
                 </Select>
               </div> */}
-              <h1 className="text-center mt-4 text-xl mb-4">
+              <h1 className="text-center mt-4 text-xl font-bold mb-4">
                 მშობელი/კანონიერი წარმომადგენელი, რომელთანაც იდება ხელშეკრულება:
+                <div className=" mt-2 bg-blue-500 rounded-lg border border-blue-500 h-[6px] w-full"></div>
               </h1>
               <div className="grid gap-5 md:grid-cols-2">
                 <div>
                   <div className="mb-2 block">
                     <Label
+                      className="font-glaho text-md"
                       htmlFor="ParentFirstName"
-                      value="მშობლის/კანონიერი წარმომადგენლის სახელი *"
+                      value="მშობლის/კანონიერი წარმომადგენლის სახელი"
                     />
                   </div>
                   <TextInput
@@ -206,8 +238,9 @@ const SaturdaySchoolRegistrationPage = () => {
                 <div>
                   <div className="mb-2 block">
                     <Label
+                      className="font-glaho text-md"
                       htmlFor="ParentLastName"
-                      value="მშობლის/კანონიერი წარმომადგენლის გვარი *"
+                      value="მშობლის/კანონიერი წარმომადგენლის გვარი"
                     />
                   </div>
                   <TextInput
@@ -221,8 +254,9 @@ const SaturdaySchoolRegistrationPage = () => {
               <div>
                 <div className="mb-2 block">
                   <Label
+                    className="font-glaho text-md"
                     htmlFor="Address"
-                    value="მშობლის/კანონიერი წარმომადგენლის მისამართი *"
+                    value="მშობლის/კანონიერი წარმომადგენლის მისამართი"
                   />
                 </div>
                 <TextInput id="Address" name="address" type="text" required />
@@ -231,8 +265,9 @@ const SaturdaySchoolRegistrationPage = () => {
                 <div>
                   <div className="mb-2 block">
                     <Label
+                      className="font-glaho text-md"
                       htmlFor="ParentPhone"
-                      value="მშობლის/კანონიერი წარმომადგენლის ტელ-ნომერი *"
+                      value="მშობლის/კანონიერი წარმომადგენლის ტელ-ნომერი "
                     />
                   </div>
                   <TextInput
@@ -245,8 +280,9 @@ const SaturdaySchoolRegistrationPage = () => {
                 <div>
                   <div className="mb-2 block">
                     <Label
+                      className="font-glaho text-md"
                       htmlFor="ParentPersonalId"
-                      value="მშობლის/კანონიერი წარმომადგენლის პირადი ნომერი *"
+                      value="მშობლის/კანონიერი წარმომადგენლის პირადი ნომერი"
                     />
                   </div>
                   <TextInput
@@ -260,6 +296,7 @@ const SaturdaySchoolRegistrationPage = () => {
               <div>
                 <div className="mb-2 block">
                   <Label
+                    className="font-glaho text-md"
                     htmlFor="ParentEmail"
                     value="მშობლის/კანონიერი წარმომადგენლის ელ-ფოსტა *"
                   />
@@ -270,6 +307,143 @@ const SaturdaySchoolRegistrationPage = () => {
                   type="email"
                   required
                 />
+              </div>
+              <h1 className="text-center mt-4 text-2xl font-bold mb-4">
+                მოსწავლის ინფორმაცია:
+                <div className=" mt-2 bg-blue-500 rounded-lg border border-blue-500 h-[6px] w-full"></div>
+              </h1>
+              <div className="grid gap-5 md:grid-cols-2">
+                <div>
+                  <div className="mb-2 block">
+                    <Label
+                      className="font-glaho text-md"
+                      htmlFor="ParentFirstName"
+                      value="მოსწავლის სახელი"
+                    />
+                  </div>
+                  <TextInput
+                    id="ParentFirstName"
+                    name="parentfirstname"
+                    type="text"
+                    required
+                  />
+                </div>
+                <div>
+                  <div className="mb-2 block">
+                    <Label
+                      className="font-glaho text-md"
+                      htmlFor="ParentLastName"
+                      value="მოსწავლის გვარი"
+                    />
+                  </div>
+                  <TextInput
+                    id="ParentLastName"
+                    name="parentlastname"
+                    type="text"
+                    required
+                  />
+                </div>
+              </div>
+              <div>
+                <div className="mb-2 block">
+                  <Label
+                    className="font-glaho text-md"
+                    htmlFor="Address"
+                    value="მოსწავლის ელექტრონული ფოსტა (Teams-ში აქტიური ელ.ფოსტა)"
+                  />
+                </div>
+                <TextInput id="Address" name="address" type="text" required />
+              </div>
+              <div className="grid-cols-2 w-full">
+                <div className="">
+                  <div className="mb-4 mt-4 block">
+                    <Label
+                      className="font-glaho text-md"
+                      htmlFor="countries"
+                      value="მოსწავლის კლასი"
+                    />
+                  </div>
+                  <Select
+                    id="countries"
+                    onChange={(e) => {
+                      console.log(e.target.value);
+                      setGrade(e.target.value);
+                    }}
+                    required
+                  >
+                    <option value={3}>3 კლასი</option>
+                    <option value={4}>4 კლასი</option>
+                    <option value={5}>5 კლასი</option>
+                    <option value={6}>6 კლასი</option>
+                    <option value={7}>7 კლასი</option>
+                    <option value={8}>8 კლასი</option>
+                    <option value={9}>9 კლასი</option>
+                    <option value={10}>10 კლასი</option>
+                    <option value={11}>11 კლასი</option>
+                  </Select>
+                </div>
+                <div className="">
+                  <div className="mb-2 mt-4 block">
+                    <Label
+                      className="font-glaho text-md"
+                      htmlFor="countries"
+                      value="საგანი"
+                    />
+                  </div>
+                  {grade > 6 ? (
+                    <Select id="countries" required>
+                      <option value="math">მათემატიკა</option>
+                      <option value="physics">ფიზიკა</option>
+                    </Select>
+                  ) : (
+                    <Select id="countries" required>
+                      <option value="math">მათემატიკა</option>
+                    </Select>
+                  )}
+                </div>
+              </div>
+              <h1 className="text-center mt-4 text-2xl font-bold mb-4">
+                დროისა და მასწავლებლის არჩევა:
+                <div className=" mt-2 bg-blue-500 rounded-lg border border-blue-500 h-[6px] w-full"></div>
+              </h1>
+              <div className="grid-cols-2 w-full">
+                <div className="">
+                  <div className="mb-4 mt-4 block">
+                    <Label
+                      className="font-glaho text-md"
+                      htmlFor="countries"
+                      value="აირჩიეთ მასწავლებელი"
+                    />
+                  </div>
+                  <Select
+                    id="countries"
+                    required
+                    onChange={(e) => {
+                      setTecher(e.target.value);
+                    }}
+                  >
+                    <option>გიორგი კაკაბაძე</option>
+                    <option>თემურ გაჩეჩილაძე</option>
+                  </Select>
+                </div>
+                <div className="">
+                  <div className="mb-2 mt-4 block">
+                    <Label
+                      className="font-glaho text-md"
+                      htmlFor="countries"
+                      value="აირჩიეთ დრო ( მასწავლებლის მიხედვით )"
+                    />
+                    <TeacherSelect />
+                  </div>
+                </div>
+                <div className="flex flex-wrap items-start gap-2 w-full mt-5">
+                  <Button
+                    size="md"
+                    className="w-full font-alk tracking-widest "
+                  >
+                    რეგისტრაცია
+                  </Button>
+                </div>
               </div>
             </form>
           </vekuaregistrateform>
