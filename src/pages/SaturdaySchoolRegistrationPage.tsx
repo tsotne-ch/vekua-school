@@ -19,6 +19,7 @@ import { display } from "@mui/system";
 const SaturdaySchoolRegistrationPage = () => {
   const [grade, setGrade] = useState(3);
   const [techer, setTecher] = useState("გიორგი კაკაბაძე");
+
   const TeacherSelect = () => {
     if (techer === "გიორგი კაკაბაძე") {
       return (
@@ -48,6 +49,7 @@ const SaturdaySchoolRegistrationPage = () => {
       );
     }
   };
+
   return (
     <>
       <Helmet>
@@ -200,7 +202,7 @@ const SaturdaySchoolRegistrationPage = () => {
             </Accordion.Panel>
           </Accordion>
 
-          <vekuaregistrateform className="block mt-10">
+          <section className="block mt-10">
             <form className="flex max-w-4xl m-auto flex-col gap-4">
               <h1 className="text-center text-4xl mb-4">
                 საშაბათო სკოლაში მოსწავლის რეგისტრაცია
@@ -365,21 +367,15 @@ const SaturdaySchoolRegistrationPage = () => {
                   </div>
                   <Select
                     id="countries"
-                    onChange={(e) => {
+                    onChange={(e: any) => {
                       console.log(e.target.value);
-                      setGrade(e.target.value);
+                      setGrade(e.target.value as number);
                     }}
                     required
                   >
-                    <option value={3}>3 კლასი</option>
-                    <option value={4}>4 კლასი</option>
-                    <option value={5}>5 კლასი</option>
-                    <option value={6}>6 კლასი</option>
-                    <option value={7}>7 კლასი</option>
-                    <option value={8}>8 კლასი</option>
-                    <option value={9}>9 კლასი</option>
-                    <option value={10}>10 კლასი</option>
-                    <option value={11}>11 კლასი</option>
+                    {[...Array(10).keys()].map((key) => (
+                      <option value={key + 3}>მე-{key + 3} კლასი</option>
+                    ))}
                   </Select>
                 </div>
                 <div className="">
@@ -390,16 +386,30 @@ const SaturdaySchoolRegistrationPage = () => {
                       value="საგანი"
                     />
                   </div>
-                  {grade > 6 ? (
-                    <Select id="countries" required>
-                      <option value="math">მათემატიკა</option>
-                      <option value="physics">ფიზიკა</option>
-                    </Select>
-                  ) : (
-                    <Select id="countries" required>
-                      <option value="math">მათემატიკა</option>
-                    </Select>
-                  )}
+                  <div className="flex gap-4 mt-6">
+                    <div className="flex items-center gap-2">
+                      <Checkbox id="math" />
+                      <Label htmlFor="math" className="font-glaho text-md">
+                        მათემატიკა
+                      </Label>
+                    </div>
+                    {grade > 6 ? (
+                      <div className="flex items-center gap-2">
+                        <Checkbox id="math" />
+                        <Label htmlFor="math" className="font-glaho text-md">
+                          ფიზიკა
+                        </Label>
+                      </div>
+                    ) : (
+                      <></>
+                    )}
+                    <div className="flex items-center gap-2">
+                      <Checkbox disabled id="math" />
+                      <Label htmlFor="math" className="font-glaho text-md">
+                        ლოგიკა
+                      </Label>
+                    </div>
+                  </div>
                 </div>
               </div>
               <h1 className="text-center mt-4 text-2xl font-bold mb-4">
@@ -446,7 +456,7 @@ const SaturdaySchoolRegistrationPage = () => {
                 </div>
               </div>
             </form>
-          </vekuaregistrateform>
+          </section>
         </div>
       </div>
     </>

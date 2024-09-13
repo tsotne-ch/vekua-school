@@ -3,10 +3,17 @@ import { useParams } from "react-router-dom";
 import axios from "axios";
 import { FcBusinessContact } from "react-icons/fc";
 
+interface StudentType {
+  name: string;
+  surname: string;
+  id: string;
+  class: string;
+}
+
 const Students = () => {
   const [load, setLoaded] = useState(false);
   const [found, setFound] = useState(false);
-  const [student, setStudent] = useState({});
+  const [student, setStudent] = useState<StudentType | null>(null);
   const { code } = useParams();
 
   useEffect(() => {
@@ -34,7 +41,7 @@ const Students = () => {
       <div className="container font-glaho mt-10">
         {load ? (
           <>
-            {found ? (
+            {found && student ? (
               <>
                 <div className="text-center">
                   <p>სახელი და გვარი</p>

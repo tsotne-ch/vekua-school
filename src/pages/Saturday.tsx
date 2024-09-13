@@ -14,12 +14,21 @@ import { ExclamationTriangleIcon } from "@heroicons/react/24/outline";
 import axios from "axios";
 import Swal from "sweetalert2";
 
+interface StudentType {
+  name: string;
+  surname: string;
+  score: string;
+  math: string | null;
+  physics: string | null;
+  class: number;
+}
+
 const Saturday = () => {
   let [open, setOpen] = useState(false);
   let [found, setFound] = useState(false);
-  let [data, setData] = useState({});
+  let [data, setData] = useState<StudentType | null>(null);
 
-  const handleSubmit = async (e) => {
+  const handleSubmit = async (e: any) => {
     e.preventDefault();
     Swal.fire({
       title: "<p class='font-glaho'>იტვირთება</p>",
@@ -64,7 +73,7 @@ const Saturday = () => {
       <div className="dark:bg-slate-900">
         <div className="dark:text-white py-20 container font-glaho">
           <>
-          {/* 
+            {/* 
           <div>
             <h2 className="mt-10 text-center text-3xl font-glaho">
               პროგრამები კლასების მიხედვით
@@ -511,21 +520,21 @@ const Saturday = () => {
                 placeholder="მაგ. 7-000"
                 required
                 name="code"
-                // helperText={
-                //     <>
-                //         We’ll never share your details. Read our
-                //         <a href="#" className="ml-1 font-medium text-cyan-600 hover:underline dark:text-cyan-500">
-                //             Privacy Policy
-                //         </a>
-                //         .
-                //     </>
-                // }
+              // helperText={
+              //     <>
+              //         We’ll never share your details. Read our
+              //         <a href="#" className="ml-1 font-medium text-cyan-600 hover:underline dark:text-cyan-500">
+              //             Privacy Policy
+              //         </a>
+              //         .
+              //     </>
+              // }
               />
               <Button color="blue" type="submit" className="mt-6 mb-10" pill>
                 მოსწავლის ქულის ნახვა
               </Button>
             </form>
-            {found ? (
+            {found && data ? (
               <>
                 {/* <div className="text-center">
                   <h1 className="text-2xl">

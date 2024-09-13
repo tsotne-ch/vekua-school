@@ -8,7 +8,7 @@ import { auth } from "../firebase/firebase.config";
 const Login = () => {
   const navigate = useNavigate();
 
-  const onLogin = (e) => {
+  const onLogin = (e: any) => {
     e.preventDefault();
 
     signInWithEmailAndPassword(
@@ -49,7 +49,7 @@ const Login = () => {
           </p>
           <div className="mb-5">
             <label
-              for="email"
+              htmlFor="email"
               className="block mb-2 text-sm font-medium text-gray-900 dark:text-white"
             >
               Your email
@@ -65,7 +65,7 @@ const Login = () => {
           </div>
           <div className="mb-5">
             <label
-              for="password"
+              htmlFor="password"
               className="block mb-2 text-sm font-medium text-gray-900 dark:text-white"
             >
               Your password

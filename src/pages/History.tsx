@@ -12,8 +12,8 @@ const History = () => {
         <title>ისტორია და მისია</title>
       </Helmet>
       <Banner heading="ისტორია და მისია" />
-      <Mission heading="მისია" />
-      <Story heading="მისია" />
+      <Mission />
+      <Story />
       <div className="container py-10">
         <Timeline
           horizontal

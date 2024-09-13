@@ -7,7 +7,7 @@ import { styled } from "@mui/material/styles";
 import Switch from "@mui/material/Switch";
 import { Link } from "react-router-dom";
 
-const IOSSwitch = styled((props) => (
+const IOSSwitch = styled((props: any) => (
   <Switch focusVisibleClassName=".Mui-focusVisible" disableRipple {...props} />
 ))(({ theme }) => ({
   width: 42,
@@ -118,9 +118,8 @@ export default function Example() {
 
   return (
     <header
-      className={`bg-sky-100 dark:bg-slate-900 font-alk transition-all duration-300 ${
-        fixed ? "md:h-[111.883px]" : ""
-      }`}
+      className={`bg-sky-100 dark:bg-slate-900 font-alk transition-all duration-300 ${fixed ? "md:h-[111.883px]" : ""
+        }`}
     >
       <div
         className={
@@ -344,7 +343,7 @@ export default function Example() {
                     ვეკუა TV
                   </Link>
                   <p className="!mt-8 dark:text-white">ბნელი რეჟიმი</p>
-                  <IOSSwitch onChange={() => changeTheme()} checked={checked} />
+                  <IOSSwitch onChange={changeTheme} checked={checked} />
                 </div>
               </div>
             </div>

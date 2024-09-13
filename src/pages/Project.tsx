@@ -19,8 +19,16 @@ import { Helmet } from "react-helmet";
 import { Link } from "react-router-dom";
 
 const Post = () => {
+
+  interface postType {
+    title: string;
+    url: string;
+    content: string;
+
+  }
+
   const id = useParams();
-  const [post, setPost] = useState({});
+  const [post, setPost] = useState<postType | null>(null);
   const nav = useNavigate();
   const [found, setFound] = useState(true);
 
@@ -35,7 +43,7 @@ const Post = () => {
       setFound(false);
       return;
     }
-    setPost(querySnapshot.docs[0].data());
+    setPost(querySnapshot.docs[0].data() as postType);
   };
 
   useEffect(() => {
@@ -46,7 +54,7 @@ const Post = () => {
     <>
       <div className=" border-b dark:border-gray-800 w-full py-1"></div>
       <div className="py-20 container dark:text-white">
-        {found ? (
+        {found && post ? (
           <>
             <div className="flex flex-col md:flex-row gap-3">
               <Helmet>

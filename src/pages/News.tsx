@@ -17,7 +17,7 @@ import {
 import { Pagination } from "flowbite-react";
 import { useState } from "react";
 import { Helmet } from "react-helmet";
-import { onAuthStateChanged } from "firebase/auth";
+import { onAuthStateChanged, User } from "firebase/auth";
 import { Link as LinkRoute } from "react-router-dom";
 
 import { CKEditor } from "@ckeditor/ckeditor5-react";
@@ -64,24 +64,27 @@ import {
   TableToolbar,
   TextTransformation,
   Undo,
+  EditorConfig,
 } from "ckeditor5";
 
 import "ckeditor5/ckeditor5.css";
 
-const MotionComponent = ({ as, children, ...props }) => {
-  const ChildrenComponent = motion(as, {
-    forwardMotionProps: true,
-  });
+interface PostType {
+  info: {
+    url: string;
+    title: string;
+    date: string;
+  }
+  id: string;
+}
 
-  return <ChildrenComponent {...props}>{children}</ChildrenComponent>;
-};
 
 const News = () => {
   const [currentPage, setCurrentPage] = useState(1);
-  const [posts, setPosts] = useState([]);
-  const [feed, setFeed] = useState([]);
+  const [posts, setPosts] = useState<PostType[]>([]);
+  const [feed, setFeed] = useState<PostType[]>([]);
   const [size, setSize] = useState(1);
-  const [admin, setAdmin] = useState(null);
+  const [admin, setAdmin] = useState<User | null>(null);
   const [data, setData] = useState("");
 
   const getPosts = async () => {
@@ -91,8 +94,8 @@ const News = () => {
       orderBy("number", "desc")
     );
     const querySnapshot = await getDocs(q);
-    let list = [];
-    querySnapshot.forEach((doc) => {
+    let list: PostType[] = [];
+    querySnapshot.forEach((doc: any) => {
       list.push({ info: doc.data(), id: doc.id });
     });
     setSize(Math.ceil(list.length / 4));
@@ -106,7 +109,7 @@ const News = () => {
   }, []);
 
   useEffect(() => {
-    onAuthStateChanged(auth, (user) => {
+    onAuthStateChanged(auth, (user: User | null) => {
       if (user) {
         // User is signed in, see docs for a list of available properties
         // https://firebase.google.com/docs/reference/js/firebase.User
@@ -127,7 +130,7 @@ const News = () => {
     return () => setIsLayoutReady(false);
   }, []);
 
-  const onPageChange = (page) => {
+  const onPageChange = (page: number) => {
     setCurrentPage(page);
     const l = (page - 1) * 4;
     const r = l + 4;
@@ -318,7 +321,7 @@ const News = () => {
     },
   };
 
-  const onPost = async (e) => {
+  const onPost = async (e: any) => {
     e.preventDefault();
     if (admin) {
       const q = query(collection(firestore, "posts"));
@@ -405,7 +408,7 @@ const News = () => {
                             setData(editor.getData())
                           }
                           editor={ClassicEditor}
-                          config={editorConfig}
+                          config={editorConfig as EditorConfig}
                         />
                       )}
                     </div>

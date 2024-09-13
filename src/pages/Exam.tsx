@@ -25,7 +25,14 @@ import { firestore, storage, auth } from "../firebase/firebase.config";
 import { Helmet } from "react-helmet";
 import Swal from "sweetalert2";
 
-let process = import.meta;
+interface StudentType {
+  name: string;
+  surname: string;
+  code: string;
+  points: string;
+  math: null | string;
+  physics: null | string;
+}
 
 const Exam = () => {
   let [open, setOpen] = useState(false);
@@ -57,7 +64,7 @@ const Exam = () => {
   let [pdfloading, setPDF] = useState(false);
   let [pdflink, setPDFLink] = useState("");
   // this is for seeing code ok blyat naxui suka
-  let [data, setData] = useState(null);
+  let [data, setData] = useState<StudentType | null>(null);
 
   // const submit = (e) => {
   //   e.preventDefault();
@@ -747,7 +754,7 @@ const Exam = () => {
   //   );
   // };
 
-  const handleSubmit = (e) => {
+  const handleSubmit = (e: any) => {
     e.preventDefault();
     Swal.fire({
       title: "<p class='font-glaho'>იტვირთება</p>",
@@ -813,21 +820,21 @@ const Exam = () => {
             placeholder="მაგ. 7-000"
             required
             name="code"
-            // helperText={
-            //     <>
-            //         We’ll never share your details. Read our
-            //         <a href="#" className="ml-1 font-medium text-cyan-600 hover:underline dark:text-cyan-500">
-            //             Privacy Policy
-            //         </a>
-            //         .
-            //     </>
-            // }
+          // helperText={
+          //     <>
+          //         We’ll never share your details. Read our
+          //         <a href="#" className="ml-1 font-medium text-cyan-600 hover:underline dark:text-cyan-500">
+          //             Privacy Policy
+          //         </a>
+          //         .
+          //     </>
+          // }
           />
           <Button color="blue" type="submit" className="mt-6 mb-10" pill>
             მოსწავლის ქულის ნახვა
           </Button>
         </form>
-        {found ? (
+        {found && data ? (
           <>
             {/* <div className="text-center">
                   <h1 className="text-2xl">

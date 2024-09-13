@@ -17,7 +17,7 @@ import Swal from "sweetalert2";
 
 const Contact = () => {
   const [count, setCount] = useState(0);
-  const handleSubmit = async (e) => {
+  const handleSubmit = async (e: any) => {
     e.preventDefault();
 
     const q = query(collection(firestore, "messages"));
@@ -58,7 +58,6 @@ const Contact = () => {
           src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3705.7397193867932!2d44.794248716898544!3d41.69327600549267!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x40440cec02a4e4ff%3A0xa40152bf67fa2b5c!2z4YOY4YOa4YOY4YOQIOGDleGDlOGDmeGDo-GDkOGDoSDhg6Hhg5Dhg64uIOKEljQyIOGDoeGDkOGDr-GDkOGDoOGDnSDhg6Hhg5nhg53hg5rhg5A!5e1!3m2!1ska!2sge!4v1631458317983!5m2!1ska!2sge"
           title="map"
           height="450"
-          allowfullscreen=""
           className="rounded-xl shadow-lg w-full"
           loading="lazy"
         ></iframe>
@@ -83,7 +82,7 @@ const Contact = () => {
             type="email"
             name="email"
             icon={HiMail}
-            autoComplete={false}
+            autoComplete={'false'}
             placeholder="name@email.com"
             required
           />

@@ -18,10 +18,19 @@ import { Pagination } from "flowbite-react";
 import { useState } from "react";
 import { Helmet } from "react-helmet";
 
+interface PostType {
+  info: {
+    url: string;
+    title: string;
+    date: string;
+  }
+  id: string;
+}
+
 const News = () => {
   const [currentPage, setCurrentPage] = useState(1);
-  const [posts, setPosts] = useState([]);
-  const [feed, setFeed] = useState([]);
+  const [posts, setPosts] = useState<PostType[]>([]);
+  const [feed, setFeed] = useState<PostType[]>([]);
   const [size, setSize] = useState(1);
 
   const getPosts = async () => {
@@ -31,8 +40,8 @@ const News = () => {
       orderBy("number", "desc")
     );
     const querySnapshot = await getDocs(q);
-    let list = [];
-    querySnapshot.forEach((doc) => {
+    let list: PostType[] = [];
+    querySnapshot.forEach((doc: any) => {
       list.push({ info: doc.data(), id: doc.id });
     });
     setSize(Math.ceil(list.length / 4));
@@ -45,7 +54,7 @@ const News = () => {
     getPosts();
   }, []);
 
-  const onPageChange = (page) => {
+  const onPageChange = (page: number) => {
     setCurrentPage(page);
     const l = (page - 1) * 4;
     const r = l + 4;
