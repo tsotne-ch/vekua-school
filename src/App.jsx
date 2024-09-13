@@ -20,6 +20,7 @@ import Projects from "./pages/Projects";
 import Project from "./pages/Project";
 import Achievments from "./pages/Achievments";
 import Login from "./pages/Login";
+import SaturdaySchoolRegistrationPage from "./pages/SaturdaySchoolRegistrationPage"; // longass import statement lmao
 
 function App() {
   let urls = ["/login"];
@@ -32,7 +33,10 @@ function App() {
           <Routes>
             <Route index element={<Home />} />
             <Route path="/history" element={<History />} />
-            <Route path="/saturday-school" element={<Saturday />} />
+            <Route
+              path="/saturday-school"
+              element={<SaturdaySchoolRegistrationPage />}
+            />
             <Route path="/exams" element={<Exam />} />
             <Route path="/laws" element={<Policy />} />
             <Route path="/contact" element={<Contact />} />

@@ -290,6 +290,7 @@ export default function Example() {
                 <div className="space-y-2 py-6">
                   <Link
                     to="/"
+                    onClick={() => setMobileMenuOpen(false)}
                     className="-mx-3 block rounded-lg px-3 py-2 text-base  leading-7 text-gray-900 dark:text-white hover:bg-gray-50"
                   >
                     მთავარი
@@ -298,6 +299,7 @@ export default function Example() {
                     <Link
                       to={item.href}
                       key={item.name}
+                      onClick={() => setMobileMenuOpen(false)}
                       className="-mx-3 block rounded-lg px-3 py-2 text-base  leading-7 text-gray-900 dark:text-white hover:bg-gray-50"
                     >
                       {item.name}
@@ -305,18 +307,21 @@ export default function Example() {
                   ))}
                   <Link
                     to="/news"
+                    onClick={() => setMobileMenuOpen(false)}
                     className="-mx-3 block rounded-lg px-3 py-2 text-base  leading-7 text-gray-900  hover:bg-gray-50 dark:text-white"
                   >
                     სიახლეები
                   </Link>
                   <Link
                     to="/projects"
+                    onClick={() => setMobileMenuOpen(false)}
                     className="-mx-3 block rounded-lg px-3 py-2 text-base  leading-7 text-gray-900  hover:bg-gray-50 dark:text-white"
                   >
                     პროგრამები/პროექტები
                   </Link>
                   <Link
                     to="/contact"
+                    onClick={() => setMobileMenuOpen(false)}
                     className="-mx-3 block rounded-lg px-3 py-2 text-base  leading-7 text-gray-900 hover:bg-gray-50 dark:text-white"
                   >
                     კონტაქტი
@@ -325,6 +330,7 @@ export default function Example() {
                     <Link
                       to={item.href}
                       key={item.name}
+                      onClick={() => setMobileMenuOpen(false)}
                       className="-mx-3 block rounded-lg px-3 py-2 text-base  leading-7 text-gray-900 dark:text-white hover:bg-gray-50"
                     >
                       {item.name}
@@ -332,6 +338,7 @@ export default function Example() {
                   ))}
                   <Link
                     to="https://www.youtube.com/@TV-ug6oo"
+                    onClick={() => setMobileMenuOpen(false)}
                     className="-mx-3 block rounded-lg px-3 py-2 text-base  leading-7 text-gray-900 dark:text-white hover:bg-gray-50"
                   >
                     ვეკუა TV
