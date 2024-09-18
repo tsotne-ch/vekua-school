@@ -796,15 +796,17 @@ const Exam = () => {
         <title>სარეკომენდაციო წერა</title>
       </Helmet>
       <div className="">
-        <h4 className="mb-3 mt-10 font-glaho text-2xl text-center">
-          4, 5 და 6 ივლისს ჩატარებული სარეკომენდაციო წერების შედეგები ფიზიკასა
-          და მათემატიკაში
+        <h4 className=" mt-10 font-glaho text-3xl text-center">
+          სარეკომენდაციო წერა დასრულებულია
+        </h4>
+        <h4 className="mb-3 mt-4 font-glaho text-base text-center">
+          შემდეგი სარეკომენდაციო წერა დაიწყება 2025 წლის ივლისს
         </h4>
         {/* <p className="font-glaho text-center">
           დეტალური ინფორმაცია სარეკომენდაციო წერებზე შეგიძლიათ იხილოთ სიახლეების
           ველში
         </p> */}
-        <form
+        {/* <form
           onSubmit={handleSubmit}
           className="max-w-lg mx-auto flex flex-col"
         >
@@ -833,7 +835,12 @@ const Exam = () => {
           <Button color="blue" type="submit" className="mt-6 mb-10" pill>
             მოსწავლის ქულის ნახვა
           </Button>
-        </form>
+        </form> */}
+
+        <div className="flex justify-center">
+          <FcGraduationCap size={"6.4rem"} />
+        </div>
+
         {found && data ? (
           <>
             {/* <div className="text-center">
@@ -845,7 +852,7 @@ const Exam = () => {
             {data.code[0] == "7" ? (
               <div className="text-center font-glaho">
                 <h1 className="text-2xl">
-                  {data.name} {data.surname}
+
                 </h1>
                 {data.points ? (
                   <h2 className="text-4xl mt-5">{data.points} ქულა</h2>
@@ -856,7 +863,7 @@ const Exam = () => {
             ) : (
               <div className="text-center font-glaho">
                 <h1 className="text-2xl">
-                  {data.name} {data.surname}
+
                 </h1>
                 <h2 className="text-4xl mt-5">
                   მათემატიკა: {!data.math ? "შეფასება არ აქვს" : "" + data.math}

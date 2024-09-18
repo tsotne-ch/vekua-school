@@ -1,6 +1,6 @@
 import React, { useEffect, useState, useRef } from "react";
 import { useParams } from "react-router-dom";
-import { auth, firestore, firebase } from "../firebase/firebase.config";
+import { auth, firestore } from "../firebase/firebase.config";
 import { Navigate, useNavigate } from "react-router-dom";
 import { FaSchool } from "react-icons/fa6";
 import { PiStudentFill } from "react-icons/pi";
@@ -18,6 +18,7 @@ import {
   deleteDoc,
   DocumentReference,
   DocumentData,
+  documentId,
 } from "firebase/firestore";
 import parse from "html-react-parser";
 import { Helmet } from "react-helmet";
@@ -93,7 +94,7 @@ const Post = () => {
   const getPost = async () => {
     const q = query(
       collection(firestore, "posts"),
-      where(firebase.firestore.FieldPath.documentId(), "==", id.id)
+      where(documentId(), "==", id.id)
     );
     const querySnapshot = await getDocs(q);
     if (!querySnapshot.docs.length) {
