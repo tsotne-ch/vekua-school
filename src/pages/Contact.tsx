@@ -3,7 +3,7 @@ import { Button, Checkbox, Label, TextInput, Textarea } from "flowbite-react";
 import { HiMail } from "react-icons/hi";
 import { HiPhone } from "react-icons/hi2";
 import { Helmet } from "react-helmet";
-import { auth, firestore, firebase } from "../firebase/firebase.config";
+import { auth, firestore } from "../firebase/firebase.config";
 import {
   collection,
   query,

@@ -5,7 +5,7 @@ import { Button } from "flowbite-react";
 import { Datepicker } from "flowbite-react";
 import { Card } from "flowbite-react";
 import { motion } from "framer-motion";
-import { auth, firestore, firebase } from "../firebase/firebase.config";
+import { auth, firestore } from "../firebase/firebase.config";
 import {
   collection,
   query,
