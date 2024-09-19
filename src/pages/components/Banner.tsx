@@ -1,4 +1,4 @@
-const Banner = ({ heading }) => {
+const Banner = ({ heading }: { heading: string }) => {
   return (
     <section
       className={`py-36 bg-center bg-fixed bg-cover`}

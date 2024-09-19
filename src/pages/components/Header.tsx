@@ -7,7 +7,7 @@ import { styled } from "@mui/material/styles";
 import Switch from "@mui/material/Switch";
 import { Link } from "react-router-dom";
 
-const IOSSwitch = styled((props) => (
+const IOSSwitch = styled((props: any) => (
   <Switch focusVisibleClassName=".Mui-focusVisible" disableRipple {...props} />
 ))(({ theme }) => ({
   width: 42,
@@ -118,9 +118,8 @@ export default function Example() {
 
   return (
     <header
-      className={`bg-sky-100 dark:bg-slate-900 font-alk transition-all duration-300 ${
-        fixed ? "md:h-[111.883px]" : ""
-      }`}
+      className={`bg-sky-100 dark:bg-slate-900 font-alk transition-all duration-300 ${fixed ? "md:h-[111.883px]" : ""
+        }`}
     >
       <div
         className={
@@ -290,6 +289,7 @@ export default function Example() {
                 <div className="space-y-2 py-6">
                   <Link
                     to="/"
+                    onClick={() => setMobileMenuOpen(false)}
                     className="-mx-3 block rounded-lg px-3 py-2 text-base  leading-7 text-gray-900 dark:text-white hover:bg-gray-50"
                   >
                     მთავარი
@@ -298,6 +298,7 @@ export default function Example() {
                     <Link
                       to={item.href}
                       key={item.name}
+                      onClick={() => setMobileMenuOpen(false)}
                       className="-mx-3 block rounded-lg px-3 py-2 text-base  leading-7 text-gray-900 dark:text-white hover:bg-gray-50"
                     >
                       {item.name}
@@ -305,18 +306,21 @@ export default function Example() {
                   ))}
                   <Link
                     to="/news"
+                    onClick={() => setMobileMenuOpen(false)}
                     className="-mx-3 block rounded-lg px-3 py-2 text-base  leading-7 text-gray-900  hover:bg-gray-50 dark:text-white"
                   >
                     სიახლეები
                   </Link>
                   <Link
                     to="/projects"
+                    onClick={() => setMobileMenuOpen(false)}
                     className="-mx-3 block rounded-lg px-3 py-2 text-base  leading-7 text-gray-900  hover:bg-gray-50 dark:text-white"
                   >
                     პროგრამები/პროექტები
                   </Link>
                   <Link
                     to="/contact"
+                    onClick={() => setMobileMenuOpen(false)}
                     className="-mx-3 block rounded-lg px-3 py-2 text-base  leading-7 text-gray-900 hover:bg-gray-50 dark:text-white"
                   >
                     კონტაქტი
@@ -325,6 +329,7 @@ export default function Example() {
                     <Link
                       to={item.href}
                       key={item.name}
+                      onClick={() => setMobileMenuOpen(false)}
                       className="-mx-3 block rounded-lg px-3 py-2 text-base  leading-7 text-gray-900 dark:text-white hover:bg-gray-50"
                     >
                       {item.name}
@@ -332,12 +337,13 @@ export default function Example() {
                   ))}
                   <Link
                     to="https://www.youtube.com/@TV-ug6oo"
+                    onClick={() => setMobileMenuOpen(false)}
                     className="-mx-3 block rounded-lg px-3 py-2 text-base  leading-7 text-gray-900 dark:text-white hover:bg-gray-50"
                   >
                     ვეკუა TV
                   </Link>
                   <p className="!mt-8 dark:text-white">ბნელი რეჟიმი</p>
-                  <IOSSwitch onChange={() => changeTheme()} checked={checked} />
+                  <IOSSwitch onChange={changeTheme} checked={checked} />
                 </div>
               </div>
             </div>

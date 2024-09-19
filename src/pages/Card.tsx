@@ -30,7 +30,7 @@ const styles = StyleSheet.create({
   },
 });
 
-const Card = ({ student, image }) => {
+const Card = ({ student, image }: any) => { // ffs im tired of converting this to typescript let it be fucking any
   return (
     <Document style={{ height: "100%", backgroundColor: "white" }}>
       <Page size="A4" style={styles.page}>

@@ -5,7 +5,7 @@ import { Button } from "flowbite-react";
 import { Datepicker } from "flowbite-react";
 import { Card } from "flowbite-react";
 import { motion } from "framer-motion";
-import { auth, firestore, firebase } from "../firebase/firebase.config";
+import { auth, firestore } from "../firebase/firebase.config";
 import {
   collection,
   query,
@@ -18,10 +18,19 @@ import { Pagination } from "flowbite-react";
 import { useState } from "react";
 import { Helmet } from "react-helmet";
 
+interface PostType {
+  info: {
+    url: string;
+    title: string;
+    date: string;
+  }
+  id: string;
+}
+
 const News = () => {
   const [currentPage, setCurrentPage] = useState(1);
-  const [posts, setPosts] = useState([]);
-  const [feed, setFeed] = useState([]);
+  const [posts, setPosts] = useState<PostType[]>([]);
+  const [feed, setFeed] = useState<PostType[]>([]);
   const [size, setSize] = useState(1);
 
   const getPosts = async () => {
@@ -31,8 +40,8 @@ const News = () => {
       orderBy("number", "desc")
     );
     const querySnapshot = await getDocs(q);
-    let list = [];
-    querySnapshot.forEach((doc) => {
+    let list: PostType[] = [];
+    querySnapshot.forEach((doc: any) => {
       list.push({ info: doc.data(), id: doc.id });
     });
     setSize(Math.ceil(list.length / 4));
@@ -45,7 +54,7 @@ const News = () => {
     getPosts();
   }, []);
 
-  const onPageChange = (page) => {
+  const onPageChange = (page: number) => {
     setCurrentPage(page);
     const l = (page - 1) * 4;
     const r = l + 4;
@@ -94,7 +103,7 @@ const News = () => {
                     nec magna lobortis malesuada. Lorem ipsum dolor sit amet,
                     consectetur adipiscing elit.
                   </p> */}
-                    <p className=" text-gray-700 font-glaho mt-2 dark:text-gray-400 absolute bottom-3 right-3">
+                    <p className=" text-gray-700 font-glaho mt-2 dark:text-gray-400 lg:absolute lg:bottom-3 lg:right-3">
                       {post.info.date}
                     </p>
                   </div>

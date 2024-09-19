@@ -25,7 +25,14 @@ import { firestore, storage, auth } from "../firebase/firebase.config";
 import { Helmet } from "react-helmet";
 import Swal from "sweetalert2";
 
-let process = import.meta;
+interface StudentType {
+  name: string;
+  surname: string;
+  code: string;
+  points: string;
+  math: null | string;
+  physics: null | string;
+}
 
 const Exam = () => {
   let [open, setOpen] = useState(false);
@@ -57,7 +64,7 @@ const Exam = () => {
   let [pdfloading, setPDF] = useState(false);
   let [pdflink, setPDFLink] = useState("");
   // this is for seeing code ok blyat naxui suka
-  let [data, setData] = useState(null);
+  let [data, setData] = useState<StudentType | null>(null);
 
   // const submit = (e) => {
   //   e.preventDefault();
@@ -747,7 +754,7 @@ const Exam = () => {
   //   );
   // };
 
-  const handleSubmit = (e) => {
+  const handleSubmit = (e: any) => {
     e.preventDefault();
     Swal.fire({
       title: "<p class='font-glaho'>იტვირთება</p>",
@@ -789,15 +796,17 @@ const Exam = () => {
         <title>სარეკომენდაციო წერა</title>
       </Helmet>
       <div className="">
-        <h4 className="mb-3 mt-10 font-glaho text-2xl text-center">
-          4, 5 და 6 ივლისს ჩატარებული სარეკომენდაციო წერების შედეგები ფიზიკასა
-          და მათემატიკაში
+        <h4 className=" mt-10 font-glaho text-3xl text-center">
+          სარეკომენდაციო წერა დასრულებულია
+        </h4>
+        <h4 className="mb-3 mt-4 font-glaho text-base text-center">
+          შემდეგი სარეკომენდაციო წერა დაიწყება 2025 წლის ივლისს
         </h4>
         {/* <p className="font-glaho text-center">
           დეტალური ინფორმაცია სარეკომენდაციო წერებზე შეგიძლიათ იხილოთ სიახლეების
           ველში
         </p> */}
-        <form
+        {/* <form
           onSubmit={handleSubmit}
           className="max-w-lg mx-auto flex flex-col"
         >
@@ -813,21 +822,26 @@ const Exam = () => {
             placeholder="მაგ. 7-000"
             required
             name="code"
-            // helperText={
-            //     <>
-            //         We’ll never share your details. Read our
-            //         <a href="#" className="ml-1 font-medium text-cyan-600 hover:underline dark:text-cyan-500">
-            //             Privacy Policy
-            //         </a>
-            //         .
-            //     </>
-            // }
+          // helperText={
+          //     <>
+          //         We’ll never share your details. Read our
+          //         <a href="#" className="ml-1 font-medium text-cyan-600 hover:underline dark:text-cyan-500">
+          //             Privacy Policy
+          //         </a>
+          //         .
+          //     </>
+          // }
           />
           <Button color="blue" type="submit" className="mt-6 mb-10" pill>
             მოსწავლის ქულის ნახვა
           </Button>
-        </form>
-        {found ? (
+        </form> */}
+
+        <div className="flex justify-center">
+          <FcGraduationCap size={"6.4rem"} />
+        </div>
+
+        {found && data ? (
           <>
             {/* <div className="text-center">
                   <h1 className="text-2xl">
@@ -838,7 +852,7 @@ const Exam = () => {
             {data.code[0] == "7" ? (
               <div className="text-center font-glaho">
                 <h1 className="text-2xl">
-                  {data.name} {data.surname}
+
                 </h1>
                 {data.points ? (
                   <h2 className="text-4xl mt-5">{data.points} ქულა</h2>
@@ -849,7 +863,7 @@ const Exam = () => {
             ) : (
               <div className="text-center font-glaho">
                 <h1 className="text-2xl">
-                  {data.name} {data.surname}
+
                 </h1>
                 <h2 className="text-4xl mt-5">
                   მათემატიკა: {!data.math ? "შეფასება არ აქვს" : "" + data.math}

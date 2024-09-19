@@ -1,7 +1,7 @@
 import Logo from "./images/vekua_simplified.png";
 import { Link } from "react-router-dom";
 
-const Line = ({ width }) => {
+const Line = ({ width }: { width: string }) => {
   return <div className={`w-${width} p-1 bg-sky-600 mt-3 rounded-md`}></div>;
 };
 

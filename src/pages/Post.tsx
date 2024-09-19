@@ -1,6 +1,6 @@
 import React, { useEffect, useState, useRef } from "react";
 import { useParams } from "react-router-dom";
-import { auth, firestore, firebase } from "../firebase/firebase.config";
+import { auth, firestore } from "../firebase/firebase.config";
 import { Navigate, useNavigate } from "react-router-dom";
 import { FaSchool } from "react-icons/fa6";
 import { PiStudentFill } from "react-icons/pi";
@@ -16,11 +16,14 @@ import {
   doc,
   updateDoc,
   deleteDoc,
+  DocumentReference,
+  DocumentData,
+  documentId,
 } from "firebase/firestore";
 import parse from "html-react-parser";
 import { Helmet } from "react-helmet";
 import { Link as LinkRoute } from "react-router-dom";
-import { onAuthStateChanged } from "firebase/auth";
+import { onAuthStateChanged, User } from "firebase/auth";
 import { CKEditor } from "@ckeditor/ckeditor5-react";
 import { Button } from "flowbite-react";
 import Swal from "sweetalert2";
@@ -67,34 +70,42 @@ import {
   TableToolbar,
   TextTransformation,
   Undo,
+  EditorConfig,
 } from "ckeditor5";
 
 import "ckeditor5/ckeditor5.css";
 
+interface postType {
+  title: string;
+  url: string;
+  content: string;
+
+}
+
 const Post = () => {
   const id = useParams();
-  const [post, setPost] = useState({});
+  const [post, setPost] = useState<postType | null>(null);
   const nav = useNavigate();
   const [found, setFound] = useState(true);
-  const [admin, setAdmin] = useState(null);
+  const [admin, setAdmin] = useState<User | null>(null);
   const [data, setData] = useState("");
   const [isLayoutReady, setIsLayoutReady] = useState(false);
 
   const getPost = async () => {
     const q = query(
       collection(firestore, "posts"),
-      where(firebase.firestore.FieldPath.documentId(), "==", id.id)
+      where(documentId(), "==", id.id)
     );
     const querySnapshot = await getDocs(q);
     if (!querySnapshot.docs.length) {
       setFound(false);
       return;
     }
-    setPost(querySnapshot.docs[0].data());
+    setPost(querySnapshot.docs[0].data() as postType);
   };
 
   useEffect(() => {
-    onAuthStateChanged(auth, (user) => {
+    onAuthStateChanged(auth, (user: User | null) => {
       if (user) {
         // User is signed in, see docs for a list of available properties
         // https://firebase.google.com/docs/reference/js/firebase.User
@@ -302,10 +313,10 @@ const Post = () => {
     },
   };
 
-  const onPost = async (e) => {
+  const onPost = async (e: any) => {
     e.preventDefault();
-    if (admin) {
-      const document = doc(firestore, "posts", id.id);
+    if (admin && id.id) {
+      const document: DocumentReference<DocumentData, DocumentData> = doc(firestore as any, "posts", id.id);
 
       await updateDoc(document, {
         title: e.target.title.value,
@@ -319,9 +330,9 @@ const Post = () => {
     }
   };
 
-  const onDelete = async (e) => {
-    if (admin) {
-      const document = doc(firestore, "posts", id.id);
+  const onDelete = async (e: any) => {
+    if (admin && id.id) {
+      const document = doc(firestore as any, "posts", id.id);
 
       Swal.fire({
         title: "დარწმუნებული ხართ?",
@@ -348,13 +359,13 @@ const Post = () => {
     <>
       <div className=" border-b dark:border-gray-800 w-full py-1"></div>
       <div className="py-20 container dark:text-white">
-        {found ? (
+        {found && post ? (
           <>
             <div className="flex flex-col md:flex-row gap-3">
               <Helmet>
                 <title>{post.title}</title>
               </Helmet>
-              <div className=" md:w-3/4">
+              <div className="blogPost lg:w-3/4">
                 <div className="flex">
                   <img
                     src={post.url}
@@ -410,7 +421,7 @@ const Post = () => {
                                     setData(editor.getData())
                                   }
                                   editor={ClassicEditor}
-                                  config={editorConfig}
+                                  config={editorConfig as EditorConfig}
                                 />
                               )}
                             </div>
@@ -441,7 +452,7 @@ const Post = () => {
                   {parse("" + post.content)}
                 </p>
               </div>
-              <div className=" md:w-1/4 dark:bg-slate-900 bg-sky-100 dark:bg-blend-overlay rounded-xl dark:bg-opacity-75 bg-grid">
+              <div className=" lg:w-1/4 dark:bg-slate-900 bg-sky-100 dark:bg-blend-overlay rounded-xl dark:bg-opacity-75 bg-grid">
                 <h1 className="font-alk text-4xl mt-5 text-center mb-7">
                   იხილეთ მეტი
                 </h1>

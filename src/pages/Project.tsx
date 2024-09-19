@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
-import { auth, firestore, firebase } from "../firebase/firebase.config";
+import { auth, firestore } from "../firebase/firebase.config";
 import { Navigate, useNavigate } from "react-router-dom";
 import { FaSchool } from "react-icons/fa6";
 import { PiStudentFill } from "react-icons/pi";
@@ -13,21 +13,30 @@ import {
   getDocs,
   orderBy,
   limit,
+  documentId,
 } from "firebase/firestore";
 import parse from "html-react-parser";
 import { Helmet } from "react-helmet";
 import { Link } from "react-router-dom";
 
 const Post = () => {
+
+  interface postType {
+    title: string;
+    url: string;
+    content: string;
+
+  }
+
   const id = useParams();
-  const [post, setPost] = useState({});
+  const [post, setPost] = useState<postType | null>(null);
   const nav = useNavigate();
   const [found, setFound] = useState(true);
 
   const getPost = async () => {
     const q = query(
       collection(firestore, "projects"),
-      where(firebase.firestore.FieldPath.documentId(), "==", id.id)
+      where(documentId(), "==", id.id)
     );
     const querySnapshot = await getDocs(q);
 
@@ -35,7 +44,7 @@ const Post = () => {
       setFound(false);
       return;
     }
-    setPost(querySnapshot.docs[0].data());
+    setPost(querySnapshot.docs[0].data() as postType);
   };
 
   useEffect(() => {
@@ -46,7 +55,7 @@ const Post = () => {
     <>
       <div className=" border-b dark:border-gray-800 w-full py-1"></div>
       <div className="py-20 container dark:text-white">
-        {found ? (
+        {found && post ? (
           <>
             <div className="flex flex-col md:flex-row gap-3">
               <Helmet>

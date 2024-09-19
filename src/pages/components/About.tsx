@@ -2,7 +2,7 @@ import { motion } from "framer-motion";
 import { useInView } from "framer-motion";
 import { useEffect, useRef, useState } from "react";
 
-const Line = ({ width }) => {
+const Line = ({ width }: { width: string }) => {
   return (
     <div
       className={`p-1 bg-sky-600 mt-3 rounded-md dark:bg-gray-600`}
@@ -23,9 +23,8 @@ const About = () => {
   return (
     <motion.section
       ref={ref}
-      className={` bg-[rgb(232, 249, 255)] py-20 dark:bg-slate-900 transition-all duration-300 ${
-        faded ? "animate-floatIn" : ""
-      }`}
+      className={` bg-[rgb(232, 249, 255)] py-20 dark:bg-slate-900 transition-all duration-300 ${faded ? "animate-floatIn" : ""
+        }`}
     >
       <div className="container">
         <div className={`flex xl:flex-row flex-col`}>

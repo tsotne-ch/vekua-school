@@ -9,9 +9,9 @@ const Policy = () => {
   return (
     <>
       <Helmet>
-        <title>სასწავლო გეგმა</title>
+        <title>შინაგანწესი</title>
       </Helmet>
-      <Banner heading="სასკოლო სასწავლო გეგმა" />
+      <Banner heading="სკოლის შინაგანწესი" />
       <div className="py-20 container">
         <div className="flex justify-center mb-7">
           <FcDocument size={"6rem"} />
@@ -19,16 +19,16 @@ const Policy = () => {
 
         <h1 className="text-3xl font-alk text-center dark:text-white">
           სსიპ აკადემიკოს ილია ვეკუას სახელობის ფიზიკა-მათემატიკის ქალაქ
-          თბილისის #42 საჯარო სკოლის სასკოლო სასწავლო გეგმა
+          თბილისის #42 საჯარო სკოლის შინაგანწესი
         </h1>
 
         <h2 className="text-2xl font-alk text-center mt-3 dark:text-white">
-          2022-2023 წელი
+          2021 წელი
         </h2>
 
         <div className="flex justify-center mt-5">
-          <Button color="blue" href="/plan.pdf" download="">
-            <FaDownload size={"1.1rem"} className="mr-3" /> სასწავლო გეგმის
+          <Button color="blue" href="/laws.pdf">
+            <FaDownload size={"1.1rem"} className="mr-3" /> შინაგანწესის
             გადმოწერა
           </Button>
         </div>
