@@ -205,7 +205,7 @@ const SaturdaySchoolRegistrationPage = () => {
         text: "მოსწავლე წინასწარი რეგისტრაცია წარმატებით გაიარა. ხელშეკრულების გასაფორმებლად 2 სამუშაო დღის განმავლობაში გთხოვთ გადმორიცხოთ თანხა და ქვითარი სკოლაში მოიტანოთ.",
         icon: "success"
       });
-    } else {
+    } else if (response.resonse) {
       switch (response.response.data.code) {
         case 10:
           Swal.fire({
