@@ -103,7 +103,7 @@ const News = () => {
                     nec magna lobortis malesuada. Lorem ipsum dolor sit amet,
                     consectetur adipiscing elit.
                   </p> */}
-                    <p className=" text-gray-700 font-glaho mt-2 dark:text-gray-400 absolute bottom-3 right-3">
+                    <p className=" text-gray-700 font-glaho mt-2 dark:text-gray-400 lg:absolute lg:bottom-3 lg:right-3">
                       {post.info.date}
                     </p>
                   </div>

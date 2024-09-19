@@ -430,13 +430,13 @@ const News = () => {
           <div className="lg:basis-1/4 p-4 justify-center flex">
             <Datepicker inline className=" sticky" />
           </div>
-          <div className="lg:basis-3/4 p-4">
-            <div className="data">
+          <div className="lg:basis-3/4">
+            <div className="data lg:p-4 p-7">
               {feed.map((post, index) => (
                 <LinkRoute
                   key={index}
                   to={`/news/${post.id}`}
-                  className=" hover:scale-105 overflow-ellipsis overflow-hidden relative mt-2 p-3 md:h-48 w-full flex flex-col md:flex-row rounded-md shadow-md bg-white hover:bg-gray-50 transition-all ease-in-out duration-300 dark:bg-slate-800 dark:text-white dark:hover:bg-slate-700"
+                  className=" hover:scale-105 overflow-ellipsis overflow-hidden relative lg:mt-2 mt-4 p-3 md:h-48 w-full flex flex-col md:flex-row rounded-md shadow-md bg-white hover:bg-gray-50 transition-all ease-in-out duration-300 dark:bg-slate-800 dark:text-white dark:hover:bg-slate-700"
                 >
                   <div
                     style={{
@@ -446,7 +446,7 @@ const News = () => {
                     className="aspect-square w-full md:h-full md:w-auto rounded-md"
                   ></div>
                   <div className="px-3">
-                    <h1 className="xl:text-3xl text-2xl font-glaho mt-4 overflow-ellipsis">
+                    <h1 className="xl:text-3xl md:text-2xl text-xl font-glaho mt-4 overflow-ellipsis">
                       {post.info.title}
                     </h1>
                     {/* <p className="font-glaho mt-3 mb-5">
@@ -455,7 +455,7 @@ const News = () => {
                     nec magna lobortis malesuada. Lorem ipsum dolor sit amet,
                     consectetur adipiscing elit.
                   </p> */}
-                    <p className=" text-gray-700 font-glaho mt-2 dark:text-gray-400 absolute bottom-3 right-3">
+                    <p className=" text-gray-700 font-glaho mt-2 dark:text-gray-400 lg:absolute lg:bottom-3 lg:right-3">
                       {post.info.date}
                     </p>
                   </div>

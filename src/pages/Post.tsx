@@ -365,7 +365,7 @@ const Post = () => {
               <Helmet>
                 <title>{post.title}</title>
               </Helmet>
-              <div className=" md:w-3/4">
+              <div className="blogPost lg:w-3/4">
                 <div className="flex">
                   <img
                     src={post.url}
@@ -452,7 +452,7 @@ const Post = () => {
                   {parse("" + post.content)}
                 </p>
               </div>
-              <div className=" md:w-1/4 dark:bg-slate-900 bg-sky-100 dark:bg-blend-overlay rounded-xl dark:bg-opacity-75 bg-grid">
+              <div className=" lg:w-1/4 dark:bg-slate-900 bg-sky-100 dark:bg-blend-overlay rounded-xl dark:bg-opacity-75 bg-grid">
                 <h1 className="font-alk text-4xl mt-5 text-center mb-7">
                   იხილეთ მეტი
                 </h1>
