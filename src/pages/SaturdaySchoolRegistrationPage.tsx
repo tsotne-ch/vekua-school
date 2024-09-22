@@ -14,10 +14,16 @@ import axios from "axios";
 import Swal from "sweetalert2";
 import { Accordion, Modal } from "flowbite-react";
 import { Button, Checkbox, Label, TextInput, Select, FileInput } from "flowbite-react";
-import { app, database, storage } from "../firebase/firebase.config";
+import { app, auth, database, storage } from "../firebase/firebase.config";
 import { ref, get, onValue, child, getDatabase } from 'firebase/database';
 import { ref as storageRef, uploadBytes } from 'firebase/storage'
 import { Link } from "react-router-dom";
+import { onAuthStateChanged, User } from "firebase/auth";
+import ProductsDemo from "./components/Datatable";
+import { PrimeReactProvider } from "primereact/api";
+
+import "primereact/resources/themes/lara-light-cyan/theme.css";
+
 
 function change(subject: string) {
   Swal.fire({
@@ -41,6 +47,7 @@ const SaturdaySchoolRegistrationPage = () => {
   const mathRef = useRef<HTMLSelectElement | null>(null);
   const physicsRef = useRef<HTMLSelectElement | null>(null);
   const otherRef = useRef<HTMLSelectElement | null>(null);
+  const [admin, setAdmin] = useState<User | null>(null);
 
   let submitted: boolean = false;
 
@@ -109,6 +116,22 @@ const SaturdaySchoolRegistrationPage = () => {
       submitted ? '' : change('კრიტიკული და ანალიტიკური აზროვნების');
     }
   }, [data])
+
+  useEffect(() => {
+    onAuthStateChanged(auth, (user: User | null) => {
+      if (user) {
+        // User is signed in, see docs for a list of available properties
+        // https://firebase.google.com/docs/reference/js/firebase.User
+        const uid = user.uid;
+        setAdmin(user);
+        console.log("uid", uid);
+      } else {
+        // User is signed out
+        // ...
+        console.log("user is logged out");
+      }
+    });
+  }, []);
 
 
   async function handleSubmit(e: any) {
@@ -189,6 +212,7 @@ const SaturdaySchoolRegistrationPage = () => {
 
     let response: any = await axios.post(import.meta.env.VITE_REACT_APP_SERVERURL + '/addsaturdayschoolstudent', formData).catch((err) => { console.log(err); return err })
     Swal.close();
+    console.log("a");
     console.log(response);
     if (response && response.data?.ok) {
 
@@ -205,7 +229,7 @@ const SaturdaySchoolRegistrationPage = () => {
         text: "მოსწავლე წინასწარი რეგისტრაცია წარმატებით გაიარა. ხელშეკრულების გასაფორმებლად 2 სამუშაო დღის განმავლობაში გთხოვთ გადმორიცხოთ თანხა და ქვითარი სკოლაში მოიტანოთ.",
         icon: "success"
       });
-    } else if (response.resonse) {
+    } else if (response.response.status == '409') {
       switch (response.response.data.code) {
         case 10:
           Swal.fire({
@@ -268,6 +292,15 @@ const SaturdaySchoolRegistrationPage = () => {
       <Banner heading="საშაბათო სკოლა" />
       <div className="dark:bg-slate-900">
         <div className="dark:text-white py-20 container font-glaho">
+
+
+          <div className="my-10 text-black">
+
+            {admin ? <></> : <></>}
+
+          </div>
+
+
           <Link to="http://localhost:5173/news/FJr4rScWRSuhJaCCCHlI" className="block">
             <Button className="flex text-center w-full" color="light">როგორ დავრეგისტრირდე საშაბათო სკოლაში?</Button>
           </Link>

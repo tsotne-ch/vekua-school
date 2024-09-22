@@ -2,7 +2,7 @@ import "./App.css";
 import Header from "./pages/components/Header";
 import Footer from "./pages/components/Footer";
 import BackToTop from "./pages/props/BackToTop";
-import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
+import { BrowserRouter as Router, Routes, Route, useLocation } from "react-router-dom";
 
 import Home from "./pages/Home";
 import History from "./pages/History";
@@ -21,14 +21,44 @@ import Project from "./pages/Project";
 import Achievments from "./pages/Achievments";
 import Login from "./pages/Login";
 import SaturdaySchoolRegistrationPage from "./pages/SaturdaySchoolRegistrationPage"; // longass import statement lmao
+import { ReactNode, useEffect, useState } from "react";
+import { onAuthStateChanged, User } from "firebase/auth";
+import { auth } from "./firebase/firebase.config";
+import Spreadsheet from "./pages/Spreadsheet";
+
+function PrivateRoute({ children }: { children?: ReactNode }) {
+
+  const [admin, setAdmin] = useState<User | null>(null);
+
+  useEffect(() => {
+    onAuthStateChanged(auth, (user: User | null) => {
+      if (user) {
+        // User is signed in, see docs for a list of available properties
+        // https://firebase.google.com/docs/reference/js/firebase.User
+        const uid = user.uid;
+        setAdmin(user);
+        console.log("uid", uid);
+      } else {
+        // User is signed out
+        // ...
+        console.log("user is logged out");
+      }
+    });
+  }, []);
+
+  return <>{admin ? <>{children}</> : <></>}</>
+
+
+}
 
 function App() {
+  let location = window.location;
   let urls = ["/login"];
   return (
     <Router>
       <div className="App">
         <BackToTop />
-        <Header />
+        {location.pathname != '/admin' ? <Header /> : <></>}
         <div className="content dark:bg-slate-900 transition-colors duration-300">
           <Routes>
             <Route index element={<Home />} />
@@ -47,6 +77,8 @@ function App() {
             <Route path="/achievments" element={<Achievments />} />
             <Route path="/projects/:id" element={<Project />} />
             <Route path="/login" element={<Login />} />
+
+            <Route path="/admin" element={<PrivateRoute><Spreadsheet /></PrivateRoute>} />
             {/* <Route path="/student/:code" element={<Students />} /> */}
             <Route
               path="*"
@@ -61,7 +93,7 @@ function App() {
             />
           </Routes>
         </div>
-        <Footer />
+        {location.pathname != '/admin' ? <Footer /> : <></>}
       </div>
     </Router>
   );
