@@ -77,7 +77,7 @@ const SaturdaySchoolRegistrationPage = () => {
 
   useEffect(() => {
     console.log("Changing Teachers")
-    if (grade != 6) {
+    if (grade != 6 && grade != 5) {
       setCritical(false);
     }
 
@@ -503,7 +503,7 @@ const SaturdaySchoolRegistrationPage = () => {
                     ) : (
                       <></>
                     )}
-                    {grade == 6 ? (
+                    {grade == 6 || grade == 5 ? (
                       <div className="flex items-center gap-2">
                         <Checkbox onChange={() => { setCritical(!critical) }} id="logic" />
                         <Label htmlFor="logic" className="font-glaho text-md">
@@ -570,7 +570,7 @@ const SaturdaySchoolRegistrationPage = () => {
                     <Label
                       className="font-glaho text-md"
                       htmlFor="critical"
-                      value="კრიტიკული აზროვნება - აირჩიეთ დრო ( მასწავლებლის მიხედვით )"
+                      value="კრიტიკული აზროვნება - აირჩიეთ დრო ( დრო შეიძლება შეიცვალოს. შეთანხმებული იქნება მათემატიკის გაკვეთილებთან მიმართებაში )"
                     />
                     <Select ref={otherRef} name="othergroup" id="critical" required defaultValue={""}>
                       <option value="" disabled={true}>აირჩიეთ</option>
