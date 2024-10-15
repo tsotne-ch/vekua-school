@@ -442,20 +442,20 @@ const Spreadsheet = () => {
             return;
         }
         const token = await auth.currentUser.getIdToken();
-        Swal.fire({
-            title: "<p class='font-glaho'>იტვირთება</p>",
-            html: "<p class='font-glaho'>გთხოვთ დაიცადოთ, მონაცემები იტვირთება</p>",
-            allowOutsideClick: false,
-            didOpen: () => {
-                Swal.showLoading();
-            },
-        });
+        // Swal.fire({
+        //     title: "<p class='font-glaho'>იტვირთება</p>",
+        //     html: "<p class='font-glaho'>გთხოვთ დაიცადოთ, მონაცემები იტვირთება</p>",
+        //     allowOutsideClick: false,
+        //     didOpen: () => {
+        //         Swal.showLoading();
+        //     },
+        // });
         let resp = await axios.get(import.meta.env.VITE_REACT_APP_ROOT_FIREBASE + '/admin/all', {
             headers: {
                 Authorization: `Bearer ${token}`
             }
         }).catch(console.error)
-        Swal.close();
+        // Swal.close();
         console.log(resp);
 
         if (resp) {
@@ -470,14 +470,14 @@ const Spreadsheet = () => {
         }
         const token = await auth.currentUser.getIdToken();
 
-        Swal.fire({
-            title: "<p class='font-glaho'>იტვირთება</p>",
-            html: "<p class='font-glaho'>გთხოვთ დაიცადოთ, მონაცემები იტვირთება</p>",
-            allowOutsideClick: false,
-            didOpen: () => {
-                Swal.showLoading();
-            },
-        });
+        // Swal.fire({
+        //     title: "<p class='font-glaho'>იტვირთება</p>",
+        //     html: "<p class='font-glaho'>გთხოვთ დაიცადოთ, მონაცემები იტვირთება</p>",
+        //     allowOutsideClick: false,
+        //     didOpen: () => {
+        //         Swal.showLoading();
+        //     },
+        // });
 
         let resp = await axios.get(import.meta.env.VITE_REACT_APP_ROOT_FIREBASE + '/admin/markaspaid/' + studentid, {
             headers: {
@@ -485,7 +485,34 @@ const Spreadsheet = () => {
             }
         }).catch(console.error)
 
-        Swal.close();
+        // Swal.close();
+
+        await getter();
+    }
+
+    async function markAsUnPaid(studentid: string) {
+        console.log(auth.currentUser)
+        if (!auth.currentUser) {
+            return;
+        }
+        const token = await auth.currentUser.getIdToken();
+
+        // Swal.fire({
+        //     title: "<p class='font-glaho'>იტვირთება</p>",
+        //     html: "<p class='font-glaho'>გთხოვთ დაიცადოთ, მონაცემები იტვირთება</p>",
+        //     allowOutsideClick: false,
+        //     didOpen: () => {
+        //         Swal.showLoading();
+        //     },
+        // });
+
+        let resp = await axios.get(import.meta.env.VITE_REACT_APP_ROOT_FIREBASE + '/admin/markasunpaid/' + studentid, {
+            headers: {
+                Authorization: `Bearer ${token}`
+            }
+        }).catch(console.error)
+
+        // Swal.close();
 
         await getter();
     }
@@ -642,6 +669,7 @@ const Spreadsheet = () => {
 
                 <thead>
                     <tr>
+                        <th className="border p-2 border-slate-600">N</th>
                         <th className="border p-2 border-slate-600">მოსწავლის პ/ნ</th>
                         <th className="border p-2 border-slate-600">მოსწავის სახელი და გვარი</th>
                         <th className="border p-2 border-slate-600">საგანი</th>
@@ -662,7 +690,7 @@ const Spreadsheet = () => {
 
                     {data ? <>
 
-                        {data.map((student: any) => {
+                        {data.map((student: any, index: number) => {
 
 
                             if (grade && student.class != grade) return;
@@ -679,6 +707,7 @@ const Spreadsheet = () => {
 
 
                             return (<tr key={student._id}>
+                                <td className='p-2 border border-slate-400'>{index}</td>
                                 <td className='p-2 border border-slate-400'>{student.studentId}</td>
                                 <td className='p-2 border border-slate-400'>{student.studentfirstname} {student.studentlastname}</td>
                                 <td className='p-2 border border-slate-400'>{student.subject === 'math' ? "მათემატიკა" : student.subject === 'physics' ? "ფიზიკა" : "კრიტიკულ."}</td>
@@ -690,7 +719,16 @@ const Spreadsheet = () => {
                                 <td className='p-2 border border-slate-400'>{student.groupfullname}</td>
                                 <td className='p-2 border border-slate-400'>{new Date(student.createdAt).toLocaleDateString()}</td>
                                 <td className={`p-4 border border-slate-400 ${student.paid ? "bg-green-500" : "bg-red-500"}`}>{student.paid ? "გადახდილი" : "გადაუხდელი"} </td>
-                                <td className='p-2 border flex gap-4 border-slate-400'>{student.paid ? <></> : <Button color="success" onClick={() => { markAsPaid(student._id) }}>გადახდილად მონიშვნა</Button>} <Button onClick={() => { onDelFromGroup(student._id) }} color="failure">სიიდან ამოშლა</Button></td>
+                                <td className='p-2 border flex gap-4 border-slate-400'>{student.paid ? <Button color="warning" onClick={async (e: React.MouseEvent<HTMLButtonElement>) => {
+                                    e.currentTarget.classList.add('opacity-50');
+                                    await markAsUnPaid(student._id);
+
+                                    e.currentTarget.classList.remove('opacity-50');
+                                }}>გადუხდელად მონიშვნა</Button> : <Button color="success" onClick={async (e: React.MouseEvent<HTMLButtonElement>) => {
+                                    e.currentTarget.classList.add('opacity-50');
+                                    await markAsPaid(student._id);
+                                    e.currentTarget.classList.remove('opacity-50');
+                                }}>გადახდილად მონიშვნა</Button>} <Button onClick={() => { onDelFromGroup(student._id) }} color="failure">სიიდან ამოშლა</Button></td>
                             </tr>)
                         })}
 

@@ -20,7 +20,9 @@ import Projects from "./pages/Projects";
 import Project from "./pages/Project";
 import Achievments from "./pages/Achievments";
 import Login from "./pages/Login";
+import SaturdaySchool from './pages/Saturday';
 import SaturdaySchoolRegistrationPage from "./pages/SaturdaySchoolRegistrationPage"; // longass import statement lmao
+import SaturdaySchoolAboutPage from './pages/SaturdaySchoolAbout';
 import { ReactNode, useEffect, useState } from "react";
 import { onAuthStateChanged, User } from "firebase/auth";
 import { auth } from "./firebase/firebase.config";
@@ -57,15 +59,14 @@ function App() {
   return (
     <Router>
       <div className="App">
-        <BackToTop />
-        {location.pathname != '/admin' ? <Header /> : <></>}
+        {location.pathname != '/admin' ? <><Header /><BackToTop /></> : <></>}
         <div className="content dark:bg-slate-900 transition-colors duration-300">
           <Routes>
             <Route index element={<Home />} />
             <Route path="/history" element={<History />} />
             <Route
               path="/saturday-school"
-              element={<SaturdaySchoolRegistrationPage />}
+              element={<SaturdaySchool />}
             />
             <Route path="/exams" element={<Exam />} />
             <Route path="/laws" element={<Policy />} />
